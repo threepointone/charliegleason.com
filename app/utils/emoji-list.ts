@@ -74,4 +74,4 @@ const art = [
   '🐀',
 ]
 
-export default [...content, ...art]
+export default [...content, ...art] as string[]
