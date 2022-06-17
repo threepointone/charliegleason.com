@@ -66,9 +66,9 @@ export async function loader({ params }: any) {
   const emoji = params.emoji
   const output = fetchEmoji(emoji)
 
-  const response:ResourceResponse = handleResponse(output)!
+  const result:ResourceResponse = handleResponse(output)!
 
-  return json(response)
+  return json(result, result.response.error ? 404 : 200)
 
   // return new Response(data, {
   //   status: 200,
