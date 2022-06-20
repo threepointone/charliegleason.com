@@ -89,7 +89,7 @@ if (font) {
       }).then((canvas: Canvas ) => {
         console.log(`✅ Generated ${id}: ${emoji}`)
         var buffer = canvas.toBuffer()
-        fs.writeFileSync(`public/emoji/${id}.png`, buffer)
+        fs.writeFileSync(`public/emoji/${emoji}.png`, buffer)
       })
     } else {
       console.log(`Skipping ${id}: ${emoji}`)
