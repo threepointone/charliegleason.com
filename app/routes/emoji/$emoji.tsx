@@ -4,7 +4,8 @@ import sampleSize from 'lodash/sampleSize'
 
 import EmojiRegex from 'emoji-regex';
 import GraphemeSplitter from 'grapheme-splitter'
-
+import nodeEmoji from 'node-emoji'
+import { Buffer } from "../../utils/buffer.server";
 
 type EmojiResponse = {
   error?: string
@@ -69,18 +70,15 @@ export async function loader({ params }: any) {
   const result:ResourceResponse = handleResponse(output)!
   const repsonseType = result.response.error ? 404 : 200
 
+  const key = nodeEmoji.find(emoji).key
+  const response = await fetch(`http://localhost:8788/assets/emoji/${key}.png`)
+  const arrayBuffer = Buffer.from(await response.arrayBuffer())
+  const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
+
   return html(`
-    <svg width="128" height="128" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#eab308" />
+    <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="40" fill="#eab308" />  
+      <image width="80" height="80" href="data:image/png;charset=utf-8;base64,${base64}" />
     </svg>
   `, repsonseType)
-  
-  // return json(result, repsonseType)
-
-  // return new Response(data, {
-  //   status: 200,
-  //   headers: {
-  //     "Content-Type": "json/text",
-  //   },
-  // });
 }

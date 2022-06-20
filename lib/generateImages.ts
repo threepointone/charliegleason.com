@@ -18,11 +18,8 @@ interface ExtendedGlyph extends Glyph {
 }
 
 if (font) {
-  const canvasSize = 512
+  const canvasSize = 160
   const imagePadding = 0
-  // const allEmoji = Object.values(nodeEmoji.emoji).filter((emoji: string) =>
-  //   requiredEmoji.includes(emoji)
-  // )
 
   const allEmoji: {[key: string]: string} = Object.fromEntries(
     Object.entries(nodeEmoji.emoji).filter(
@@ -89,7 +86,7 @@ if (font) {
       }).then((canvas: Canvas ) => {
         console.log(`✅ Generated ${id}: ${emoji}`)
         var buffer = canvas.toBuffer()
-        fs.writeFileSync(`public/emoji/${emoji}.png`, buffer)
+        fs.writeFileSync(`public/assets/emoji/${id}.png`, buffer)
       })
     } else {
       console.log(`Skipping ${id}: ${emoji}`)

@@ -30,7 +30,7 @@ const Avatar = ({ symbol = '🙈', photo = false, small = false }: Props) => {
         <div className="rounded-full overflow-hidden -ml-4">
           <img
             alt="Charlie Gleason"
-            src={`/assets/avatar-charlie-${photo}.jpg`}
+            src={`/assets/avatars/avatar-charlie-${photo}.jpg`}
             width="80"
             height="80"
           />

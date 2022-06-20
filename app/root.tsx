@@ -63,8 +63,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     photo: `0${random(1, 4)}`,
   }
 
-  console.log(data.symbol)
-
   return data
 }
 

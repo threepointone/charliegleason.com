@@ -22,14 +22,14 @@ const Header = (props:Props) => {
         <div className="pointer-events-none relative w-64 sm:w-80 z-10 -mt-6 sm:-mt-8 ml-0 sm:-ml-6 md:-ml-16 mb-2 md:mb-0 max-w-full">
           <img
             alt=""
-            src={`/assets/signature-dark.png`}
+            src={`/assets/signatures/signature-dark.png`}
             width="700"
             height="260"
             className="block dark:hidden"
           />
           <img
             alt=""
-            src={`/assets/signature-light.png`}
+            src={`/assets/signatures/signature-light.png`}
             width="700"
             height="260"
             className="hidden dark:block"
