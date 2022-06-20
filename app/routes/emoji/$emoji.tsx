@@ -1,4 +1,4 @@
-import { json } from 'remix-utils'
+import { json, html } from 'remix-utils'
 import emojiList from '~/utils/emoji-list'
 import sampleSize from 'lodash/sampleSize'
 
@@ -67,8 +67,15 @@ export async function loader({ params }: any) {
   const output = fetchEmoji(emoji)
 
   const result:ResourceResponse = handleResponse(output)!
+  const repsonseType = result.response.error ? 404 : 200
 
-  return json(result, result.response.error ? 404 : 200)
+  return html(`
+    <svg width="128" height="128" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="50" fill="#eab308" />
+    </svg>
+  `, repsonseType)
+  
+  // return json(result, repsonseType)
 
   // return new Response(data, {
   //   status: 200,
