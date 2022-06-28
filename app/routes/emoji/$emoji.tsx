@@ -69,7 +69,7 @@ function handleResponse(response: EmojiResponse) {
   }
 }
 
-async function fetchImageToBase64({ key }: string) {
+async function fetchImageToBase64(key: string) {
   const response = await fetch(`http://localhost:8788/assets/emoji/${key}.png`)
   const arrayBuffer = Buffer.from(await response.arrayBuffer())
   const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
@@ -85,22 +85,25 @@ export async function loader({ params }: any) {
 
   const key = nodeEmoji.find(emoji).key
   const leading = sampleSize(emojiList, 10).map(
-    (emoji) => nodeEmoji.find(emoji).key
+    (emoji) => nodeEmoji.find(emoji)
   )
 
   return html(
     `
     <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
       <circle cx="40" cy="40" r="40" fill="#eab308" />  
-      <image width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
+      
+      ${await Promise.all(leading.map(
+        async (other, i) => {
+          return `<image id="other-${i}" width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
+            other.key
+          )}" />
+          <animate xlink:href="#other-${i}" attributeName="opacity" values="0;1;0" dur="1s" begin="${i}s" repeatCount="indefinite" />`}
+      ))}
+
+      <image id="primary" width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
         key
       )}" />
-      ${leading.map(
-        async (emoji) =>
-          `<image width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
-            emoji
-          )}" />`
-      )}
     </svg>
   `,
     repsonseType
