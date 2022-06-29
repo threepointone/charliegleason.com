@@ -84,8 +84,8 @@ export async function loader({ params }: any) {
   const repsonseType = result.response.error ? 404 : 200
 
   const key = nodeEmoji.find(emoji).key
-  const leading = sampleSize(emojiList, 10).map(
-    (emoji) => nodeEmoji.find(emoji)
+  const leading = sampleSize(emojiList, 10).map((emoji) =>
+    nodeEmoji.find(emoji)
   )
 
   return html(
@@ -93,17 +93,53 @@ export async function loader({ params }: any) {
     <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
       <circle cx="40" cy="40" r="40" fill="#eab308" />  
       
-      ${await Promise.all(leading.map(
-        async (other, i) => {
-          return `<image id="other-${i}" width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
-            other.key
-          )}" />
-          <animate xlink:href="#other-${i}" attributeName="opacity" values="0;1;0" dur="1s" begin="${i}s" repeatCount="indefinite" />`}
-      ))}
+      <g id="other">
+        ${await Promise.all(
+          leading.map(async (other, i) => {
+            return `<image opacity="0" id="other-${i}" width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
+              other.key
+            )}" />`
+          })
+        )}
+      </g>
 
-      <image id="primary" width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
+      <style>
+        image {
+          animation: fade-in-and-out 0.2s steps(1, end) forwards;
+        }
+
+        @keyframes fade-in-and-out {
+          0% { opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+
+        @keyframes fade-in {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+
+        ${leading
+          .map(
+            (other, i) => `
+          #other-${i} {
+            animation-delay: ${i * 0.15}s;
+          }
+        `
+          )
+          .join('')}
+
+          #primary {
+            animation: fade-in 0.2s steps(1, end) forwards;
+            animation-delay: ${9 * 0.15}s;
+          }
+      </style>
+
+      <image opacity="0" id="primary" width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
         key
       )}" />
+
     </svg>
   `,
     repsonseType
