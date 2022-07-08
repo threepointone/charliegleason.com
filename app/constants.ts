@@ -1,1 +1,1 @@
-export const EMOJI_URL = 'https://emoji.charliegleason.com/'
+export const EMOJI_URL = '/emoji/'

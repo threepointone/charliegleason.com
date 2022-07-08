@@ -36,15 +36,19 @@ export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: tailwind },
     { rel: 'stylesheet', href: 'https://use.typekit.net/qjo1mgb.css' },
-    { rel: 'icon', type: 'image/png', href: `${EMOJI_URL}${'🙈'}` },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: `${EMOJI_URL}${'🙈'}?animated=false`,
+    },
   ]
 }
 
 export const meta: MetaFunction = () => {
   return tags({
-  title: 'Charlie Gleason',
-  description: 'Designer, developer, creative coder, and musician.',
-  image: 'https://charliegleason.com/social-error.png',
+    title: 'Charlie Gleason',
+    description: 'Designer, developer, creative coder, and musician.',
+    image: 'https://charliegleason.com/social-error.png',
   })
 }
 
@@ -66,7 +70,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   return data
 }
 
-// TODO: Sort 404 / 500
 export function CatchBoundary() {
   const caught = useCatch()
   return (

@@ -616,6 +616,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
+.h-\[30px\] {
+  height: 30px;
+}
+
 .w-64 {
   width: 16rem;
 }
@@ -634,6 +642,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-8 {
   width: 2rem;
+}
+
+.w-7 {
+  width: 1.75rem;
+}
+
+.w-\[30px\] {
+  width: 30px;
 }
 
 .min-w-0 {

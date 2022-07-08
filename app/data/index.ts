@@ -104,7 +104,7 @@ export const projects = {
       url: 'https://www.npmjs.com/package/releasecast',
     },
     {
-      icon: '⛱',
+      icon: '⛱️',
       title: 'Sandpit',
       subtitle: 'An open-source creative-coding library',
       url: 'https://sandpitjs.com/',
@@ -140,7 +140,7 @@ export const projects = {
       url: 'https://iwillneverletyougo.com/',
     },
     {
-      icon: '🗺',
+      icon: '🗺️',
       title: 'Beginnings & Endings',
       subtitle: 'A musical pyramid scheme',
       url: 'http://beginnings.wearebrightly.com/',

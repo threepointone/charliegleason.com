@@ -21,7 +21,13 @@ import { EMOJI_URL } from '../constants'
 let dynamicLinks: DynamicLinksFunction<LoaderData> = ({ data }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { symbol } = useRouteData('root') ?? { symbol: '💀' }
-  return [{ rel: 'icon', type: 'image/png', href: `${EMOJI_URL}${symbol}` }]
+  return [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: `${EMOJI_URL}${symbol}?animated=false`,
+    },
+  ]
 }
 
 export const handle = { dynamicLinks }

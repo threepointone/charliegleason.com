@@ -1,4 +1,4 @@
-import { json, html } from 'remix-utils'
+import { json, image } from 'remix-utils'
 import emojiList from '~/utils/emoji-list'
 import sampleSize from 'lodash/sampleSize'
 
@@ -76,72 +76,171 @@ async function fetchImageToBase64(key: string) {
   return base64
 }
 
-export async function loader({ params }: any) {
+type GenerateStyles = {
+  numImages: number
+  isAnimated?: boolean
+}
+
+function generateStyles({ numImages, isAnimated = true }: GenerateStyles) {
+  return `
+    <style>
+      ${
+        isAnimated
+          ? `
+      image {
+        animation: fade-in-and-out 0.2s steps(1, end) forwards;
+      }
+
+      @keyframes fade-in-and-out {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      ${[...Array(numImages)]
+        .map(
+          (_, i) => `
+        .other-${i} {
+          animation-delay: ${i * 0.15}s;
+        }
+      `
+        )
+        .join('')}
+
+      [class^=primary] {
+        animation: fade-in 0.2s steps(1, end) forwards;
+        animation-delay: ${(numImages - 1) * 0.15}s;
+      }
+      `
+          : ``
+      }
+
+      ${
+        !isAnimated
+          ? `
+        [class^=primary] {
+          opacity: 1;
+        }
+        `
+          : ``
+      }
+    </style>
+  `
+}
+
+export async function loader({ params, request }: any) {
+  const url = new URL(request.url)
+  const animated = url.searchParams.get('animated') !== 'false'
+
   const emoji = params.emoji
   const output = fetchEmoji(emoji)
 
   const result: ResourceResponse = handleResponse(output)!
-  const repsonseType = result.response.error ? 404 : 200
+  const responseType = result.response.error ? 404 : 200
 
-  const key = nodeEmoji.find(emoji).key
-  const leading = sampleSize(emojiList, 10).map((emoji) =>
+  if (responseType === 404) {
+    return json(result.response)
+  }
+
+  const splitter = new GraphemeSplitter()
+  const primary = splitter
+    .splitGraphemes(result.response.success!.join(''))
+    .map((emoji) => nodeEmoji.find(emoji))
+
+  const supporting = sampleSize(emojiList, 10).map((emoji) =>
     nodeEmoji.find(emoji)
   )
 
-  return html(
-    `
-    <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="40" cy="40" r="40" fill="#eab308" />  
-      
-      <g id="other">
+  return image(
+    Buffer.from(`
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        ${generateStyles({
+          numImages: supporting.length,
+          isAnimated: animated,
+        })}
+        
+        <circle cx="50%" cy="50%" r="50%" fill="#fbe047" />
+        
+        ${
+          animated
+            ? `
+        <g id="other">
+          ${await Promise.all(
+            supporting.map(async (emoji, i) => {
+              return `
+                <image
+                  opacity="0"
+                  class="other-${i}"
+                  x="5"
+                  y="5"
+                  width="90"
+                  height="90"
+                  href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
+                    emoji.key
+                  )}"
+                />
+              `
+            })
+          )}
+        </g>
+        `
+            : ``
+        }
+
         ${await Promise.all(
-          leading.map(async (other, i) => {
-            return `<image opacity="0" id="other-${i}" width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
-              other.key
-            )}" />`
+          primary.map(async (emoji, i) => {
+            return `
+              <image
+                opacity="0"
+                class="primary-${i}"
+                x="5"
+                y="5"
+                width="90"
+                height="90"
+                href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
+                  emoji.key
+                )}"
+                mask="url(#slice-${i})"
+                />
+                `
           })
         )}
-      </g>
-
-      <style>
-        image {
-          animation: fade-in-and-out 0.2s steps(1, end) forwards;
-        }
-
-        @keyframes fade-in-and-out {
-          0% { opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { opacity: 0; }
-        }
-
-        @keyframes fade-in {
-          0% { opacity: 0; }
-          100% { opacity: 1; }
-        }
-
-        ${leading
-          .map(
-            (other, i) => `
-          #other-${i} {
-            animation-delay: ${i * 0.15}s;
-          }
+        
+        ${
+          primary.length === 1
+            ? `
+            <mask id="slice-0"><rect width="100" height="100" fill="#fff" /></mask>
         `
-          )
-          .join('')}
-
-          #primary {
-            animation: fade-in 0.2s steps(1, end) forwards;
-            animation-delay: ${9 * 0.15}s;
-          }
-      </style>
-
-      <image opacity="0" id="primary" width="80" height="80" href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
-        key
-      )}" />
-
+            : ``
+        }
+        
+        ${
+          primary.length === 2
+            ? `
+              <mask id="slice-0"><path d="M0 100h100V0L0 100Z" fill="#fff" /></mask>
+              <mask id="slice-1"><path d="M100 0H0v100L100 0Z" fill="#fff" /></mask>
+        `
+            : ``
+        }
+        
+        ${
+          primary.length === 3
+            ? `
+              <mask id="slice-0"><path d="M50 0v50L0 79V0h50Z" fill="#fff" /></mask>
+              <mask id="slice-1"><path d="M50 0v50l50 29V0H50Z" fill="#fff" /></mask>
+              <mask id="slice-2"><path d="M100 79v21H0V79l50-29 50 29Z" fill="#fff" /></mask>
+        `
+            : ``
+        }
     </svg>
-  `,
-    repsonseType
+    
+    `),
+    { type: 'image/svg+xml' }
   )
 }
