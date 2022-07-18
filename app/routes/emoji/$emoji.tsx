@@ -137,6 +137,7 @@ function generateStyles({ numImages, isAnimated = true }: GenerateStyles) {
 export async function loader({ params, request }: any) {
   const url = new URL(request.url)
   const animated = url.searchParams.get('animated') !== 'false'
+  const detailed = url.searchParams.get('detailed') !== 'false'
 
   const emoji = params.emoji
   const output = fetchEmoji(emoji)
@@ -157,6 +158,35 @@ export async function loader({ params, request }: any) {
     nodeEmoji.find(emoji)
   )
 
+  const now = new Date()
+  const date = {
+    hour: now.getHours(),
+    minute: now.getMinutes(),
+    second: now.getSeconds(),
+  }
+  const size = 100
+
+  function drawArm(progress: number, width: number) {
+    const armRadians = 2 * Math.PI * progress - (2 * Math.PI) / 4
+    const armLength = size / 2
+
+    const targetX = size / 2 + Math.cos(armRadians) * (armLength - width)
+    const targetY = size / 2 + Math.sin(armRadians) * (armLength - width)
+
+    const lineX = size / 2 + Math.cos(armRadians) * (armLength - width * 2)
+    const lineY = size / 2 + Math.sin(armRadians) * (armLength - width * 2)
+
+    const center = size / 2
+
+    return `
+      <mask id="circle-${width}">
+        <circle cx="${targetX}" cy="${targetY}" r="${width}"  fill="white" />
+      </mask>
+      <line x1="${center}" y1="${center}" x2="${lineX}" y2="${lineY}" stroke-linecap="round" stroke-width="1.5" stroke="rgba(0, 0, 0, 0.15)" />
+      <circle cx="${targetX}" cy="${targetY}" r="${width}" stroke-width="3" stroke="rgba(255,255,255,0.75)" fill="rgba(0,0,0,0.5)" mask="url(#circle-${width})" />
+    `
+  }
+
   return image(
     Buffer.from(`
         <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -166,6 +196,16 @@ export async function loader({ params, request }: any) {
         })}
         
         <circle cx="50%" cy="50%" r="50%" fill="#fbe047" />
+
+        ${
+          detailed
+            ? `
+            ${drawArm(date.hour / 12, 6)}
+            ${drawArm(date.minute / 60, 4)}
+            ${drawArm(date.second / 60, 3)}
+        `
+            : ``
+        }
         
         ${
           animated
@@ -192,17 +232,17 @@ export async function loader({ params, request }: any) {
         `
             : ``
         }
-
+        
         ${await Promise.all(
           primary.map(async (emoji, i) => {
             return `
               <image
                 opacity="0"
                 class="primary-${i}"
-                x="5"
-                y="5"
-                width="90"
-                height="90"
+                x="10"
+                y="10"
+                width="80"
+                height="80"
                 href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
                   emoji.key
                 )}"
