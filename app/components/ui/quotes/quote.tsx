@@ -35,7 +35,7 @@ const Quote = ({
     </p>
     <cite className="not-italic uppercase text-xs tracking-wider mt-3 flex items-center">
       <img
-        className="rounded-full mr-2 w-8 h-8 border-2 border-neutral-300 dark:border-neutral-700"
+        className="rounded-full mr-2 w-8 h-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white"
         src={`/assets/avatars/avatar-${id}.jpg`}
         alt={`Black and white headshot of ${name}`}
         width="30"

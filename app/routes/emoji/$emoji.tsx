@@ -183,7 +183,7 @@ export async function loader({ params, request }: any) {
         <circle cx="${targetX}" cy="${targetY}" r="${width}"  fill="white" />
       </mask>
       <line x1="${center}" y1="${center}" x2="${lineX}" y2="${lineY}" stroke-linecap="round" stroke-width="1.5" stroke="rgba(0, 0, 0, 0.15)" />
-      <circle cx="${targetX}" cy="${targetY}" r="${width}" stroke-width="3" stroke="rgba(255,255,255,0.75)" fill="rgba(0,0,0,0.5)" mask="url(#circle-${width})" />
+      <circle cx="${targetX}" cy="${targetY}" r="${width}" stroke-width="3" stroke="#fff" fill="rgba(0,0,0,0.5)" mask="url(#circle-${width})" />
     `
   }
 
