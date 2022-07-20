@@ -24,7 +24,7 @@ let dynamicLinks: DynamicLinksFunction<LoaderData> = ({ data }) => {
   return [
     {
       rel: 'icon',
-      type: 'image/png',
+      type: 'image/svg',
       href: `${EMOJI_URL}${symbol}?animated=false`,
     },
   ]
