@@ -197,7 +197,10 @@ export async function loader({ params, request }: any) {
           isAnimated: animated,
         })}
         
-        <circle cx="50%" cy="50%" r="50%" fill="#fbe047" />
+  
+        <circle cx="50%" cy="50%" r="${
+          detailed ? '50%' : '45%'
+        }" fill="#fbe047" />
 
         ${
           detailed
@@ -219,10 +222,10 @@ export async function loader({ params, request }: any) {
                 <image
                   opacity="0"
                   class="other-${i}"
-                  x="5"
-                  y="5"
-                  width="90"
-                  height="90"
+                  x="${detailed ? '10' : '0'}"
+                  y="${detailed ? '10' : '0'}"
+                  width="${detailed ? '80' : '100'}"
+                  height="${detailed ? '80' : '100'}"
                   href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
                     emoji.key
                   )}"
@@ -241,10 +244,10 @@ export async function loader({ params, request }: any) {
               <image
                 opacity="0"
                 class="primary-${i}"
-                x="10"
-                y="10"
-                width="80"
-                height="80"
+                x="${detailed ? '5' : '0'}"
+                y="${detailed ? '5' : '0'}"
+                width="${detailed ? '90' : '100'}"
+                height="${detailed ? '90' : '100'}"
                 href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
                   emoji.key
                 )}"

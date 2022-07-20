@@ -45,8 +45,8 @@ const Selected = ({ sections }: Props) => {
                   return (
                     <div key={entry.title} className="flex items-start">
                       <img
-                        className="relative mr-4 rounded-full w-[30px] h-[30px] bg-yellow-300"
-                        src={`${EMOJI_URL}${entry.icon}?detailed=false`}
+                        className="relative mr-4 rounded-full w-[30px] h-[30px]"
+                        src={`${EMOJI_URL}${entry.icon}?detailed=false&animated=false`}
                         alt={`${entry.icon} emoji in a yellow circle`}
                         width="30"
                         height="30"
