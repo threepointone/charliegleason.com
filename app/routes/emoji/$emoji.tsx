@@ -69,13 +69,6 @@ function handleResponse(response: EmojiResponse) {
   }
 }
 
-async function fetchImageToBase64(key: string) {
-  const response = await fetch(`http://localhost:8788/assets/emoji/${key}.png`)
-  const arrayBuffer = Buffer.from(await response.arrayBuffer())
-  const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
-  return base64
-}
-
 type GenerateStyles = {
   numImages: number
   isAnimated?: boolean
@@ -185,6 +178,15 @@ export async function loader({ params, request }: any) {
       <line x1="${center}" y1="${center}" x2="${lineX}" y2="${lineY}" stroke-linecap="round" stroke-width="1.5" stroke="rgba(0, 0, 0, 0.15)" />
       <circle cx="${targetX}" cy="${targetY}" r="${width}" stroke-width="3" stroke="#fff" fill="rgba(0,0,0,0.5)" mask="url(#circle-${width})" />
     `
+  }
+
+  async function fetchImageToBase64(key: string) {
+    const response = await fetch(
+      `${url.protocol}//${url.host}/assets/emoji/${key}.png`
+    )
+    const arrayBuffer = Buffer.from(await response.arrayBuffer())
+    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
+    return base64
   }
 
   return image(
