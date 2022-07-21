@@ -60,7 +60,7 @@ const Events = () => (
 
           <Block id="triathlons" title="Triathlons">
             <Items>
-              <Item date="2022" title="Blenheim Palace Triathlon" />
+              <Item date="2022" title="Blenheim Palace Triathlon (Sprint)" />
             </Items>
           </Block>
             
