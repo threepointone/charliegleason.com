@@ -2,7 +2,7 @@
 
 # Charlie Gleason (dot com)
 
-This repo houses the [charliegleason.com](https://charliegleason.com/) app, built to work On The Edge™️, with Cloudflare Pages. It is built using Remix.
+This repo houses the [charliegleason.com](https://charliegleason.com/) app, built to work On The Edge™️, with Cloudflare Pages. It was made using Remix.
 
 - Learn more about [Remix via their Docs](https://remix.run/docs)
 - Learn more about [Cloudflare Pages](https://pages.cloudflare.com/)
