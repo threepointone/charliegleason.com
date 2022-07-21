@@ -1,4 +1,4 @@
-<img src="https://emoji.charliegleason.com/😊" alt="Blushing face emoji" width="64" height="64" />
+<img src="https://charliegleason.com/emoji/😊" alt="Blushing face emoji" width="64" height="64" />
 
 # Charlie Gleason (dot com)
 
