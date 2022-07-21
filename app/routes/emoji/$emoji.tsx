@@ -6,6 +6,8 @@ import EmojiRegex from 'emoji-regex'
 import GraphemeSplitter from 'grapheme-splitter'
 import nodeEmoji from 'node-emoji'
 import { Buffer } from '../../utils/buffer.server'
+import { optimize } from 'svgo'
+import type { OptimizedSvg } from 'svgo'
 
 type EmojiResponse = {
   error?: string
@@ -189,103 +191,118 @@ export async function loader({ params, request }: any) {
     return base64
   }
 
-  return image(
-    Buffer.from(`
-        <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        ${generateStyles({
-          numImages: supporting.length,
-          isAnimated: animated,
-        })}
-        
-  
-        <circle cx="50%" cy="50%" r="${
-          detailed ? '50%' : '45%'
-        }" fill="#fbe047" />
+  const svg = `
+    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      ${generateStyles({
+        numImages: supporting.length,
+        isAnimated: animated,
+      })}
+      
 
-        ${
-          detailed
-            ? `
-            ${drawArm(date.hour / 12, 6)}
-            ${drawArm(date.minute / 60, 4)}
-            ${drawArm(date.second / 60, 3)}
-        `
-            : ``
-        }
-        
-        ${
-          animated
-            ? `
-        <g id="other">
-          ${await Promise.all(
-            supporting.map(async (emoji, i) => {
-              return `
-                <image
-                  opacity="0"
-                  class="other-${i}"
-                  x="${detailed ? '10' : '0'}"
-                  y="${detailed ? '10' : '0'}"
-                  width="${detailed ? '80' : '100'}"
-                  height="${detailed ? '80' : '100'}"
-                  href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
-                    emoji.key
-                  )}"
-                />
-              `
-            })
-          )}
-        </g>
-        `
-            : ``
-        }
-        
+      <circle cx="50%" cy="50%" r="${
+        detailed ? '50%' : '45%'
+      }" fill="#fbe047" />
+
+      ${
+        detailed
+          ? `
+          ${drawArm(date.hour / 12, 6)}
+          ${drawArm(date.minute / 60, 4)}
+          ${drawArm(date.second / 60, 3)}
+      `
+          : ``
+      }
+      
+      ${
+        animated
+          ? `
+      <g id="other">
         ${await Promise.all(
-          primary.map(async (emoji, i) => {
+          supporting.map(async (emoji, i) => {
             return `
               <image
                 opacity="0"
-                class="primary-${i}"
-                x="${detailed ? '5' : '0'}"
-                y="${detailed ? '5' : '0'}"
-                width="${detailed ? '90' : '100'}"
-                height="${detailed ? '90' : '100'}"
+                class="other-${i}"
+                x="${detailed ? '10' : '0'}"
+                y="${detailed ? '10' : '0'}"
+                width="${detailed ? '80' : '100'}"
+                height="${detailed ? '80' : '100'}"
                 href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
                   emoji.key
                 )}"
-                mask="url(#slice-${i})"
-                />
-                `
+              />
+            `
           })
-        )}
-        
-        ${
-          primary.length === 1
-            ? `
-            <mask id="slice-0"><rect width="100" height="100" fill="#fff" /></mask>
-        `
-            : ``
-        }
-        
-        ${
-          primary.length === 2
-            ? `
-              <mask id="slice-0"><path d="M0 100h100V0L0 100Z" fill="#fff" /></mask>
-              <mask id="slice-1"><path d="M100 0H0v100L100 0Z" fill="#fff" /></mask>
-        `
-            : ``
-        }
-        
-        ${
-          primary.length === 3
-            ? `
-              <mask id="slice-0"><path d="M50 0v50L0 79V0h50Z" fill="#fff" /></mask>
-              <mask id="slice-1"><path d="M50 0v50l50 29V0H50Z" fill="#fff" /></mask>
-              <mask id="slice-2"><path d="M100 79v21H0V79l50-29 50 29Z" fill="#fff" /></mask>
-        `
-            : ``
-        }
+        ).then((all) => all.join(''))}
+      </g>
+      `
+          : ``
+      }
+      
+      ${await Promise.all(
+        primary.map(async (emoji, i) => {
+          return `
+            <image
+              opacity="0"
+              class="primary-${i}"
+              x="${detailed ? '5' : '0'}"
+              y="${detailed ? '5' : '0'}"
+              width="${detailed ? '90' : '100'}"
+              height="${detailed ? '90' : '100'}"
+              href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
+                emoji.key
+              )}"
+              mask="url(#slice-${i})"
+              />
+              `
+        })
+      ).then((all) => all.join(''))}
+      
+      ${
+        primary.length === 1
+          ? `
+          <mask id="slice-0"><rect width="100" height="100" fill="#fff" /></mask>
+      `
+          : ``
+      }
+      
+      ${
+        primary.length === 2
+          ? `
+            <mask id="slice-0"><path d="M0 100h100V0L0 100Z" fill="#fff" /></mask>
+            <mask id="slice-1"><path d="M100 0H0v100L100 0Z" fill="#fff" /></mask>
+      `
+          : ``
+      }
+      
+      ${
+        primary.length === 3
+          ? `
+            <mask id="slice-0"><path d="M50 0v50L0 79V0h50Z" fill="#fff" /></mask>
+            <mask id="slice-1"><path d="M50 0v50l50 29V0H50Z" fill="#fff" /></mask>
+            <mask id="slice-2"><path d="M100 79v21H0V79l50-29 50 29Z" fill="#fff" /></mask>
+      `
+          : ``
+      }
     </svg>
-    
-    `),
-    { type: 'image/svg+xml' }
-  )
+  `
+
+  const svgbuffer = (await optimize(svg, {
+    multipass: true,
+    plugins: [
+      {
+        name: 'preset-default',
+        params: {
+          overrides: {
+            removeHiddenElems: false,
+            minifyStyles: false,
+          },
+        },
+      },
+    ],
+  })) as OptimizedSvg
+
+  return image(Buffer.from(svgbuffer.data), {
+    type: 'image/svg+xml',
+  })
 }
