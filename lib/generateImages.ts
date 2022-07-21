@@ -1,5 +1,5 @@
-import type { Glyph } from 'fontkit';
-import type { Canvas } from 'canvas';
+import type { Glyph } from 'fontkit'
+import type { Canvas } from 'canvas'
 
 import fs from 'fs'
 import fontkit from 'fontkit'
@@ -7,13 +7,15 @@ import nodeEmoji from 'node-emoji'
 import requiredEmoji from '../app/utils/emoji-list'
 import { Image, createCanvas } from 'canvas'
 
+import sharp from 'sharp'
+
 const font = fontkit.openSync(
   '/System/Library/Fonts/Apple Color Emoji.ttc',
   'AppleColorEmoji'
 )
 
 interface ExtendedGlyph extends Glyph {
-  getImageForSize: (size: number) => {}; 
+  getImageForSize: (size: number) => {}
   data: any
 }
 
@@ -21,14 +23,14 @@ if (font) {
   const canvasSize = 160
   const imagePadding = 0
 
-  const allEmoji: {[key: string]: string} = Object.fromEntries(
-    Object.entries(nodeEmoji.emoji).filter(
-      ([key, emoji]) => requiredEmoji.includes(emoji)
+  const allEmoji: { [key: string]: string } = Object.fromEntries(
+    Object.entries(nodeEmoji.emoji).filter(([key, emoji]) =>
+      requiredEmoji.includes(emoji)
     )
   )
 
-  Object.keys(allEmoji).forEach((id:string) => {
-    const emoji:string = allEmoji[id]
+  Object.keys(allEmoji).forEach((id: string) => {
+    const emoji: string = allEmoji[id]
 
     console.log(`Generating ${id}: ${emoji}`)
 
@@ -36,7 +38,9 @@ if (font) {
     const ctx = canvas.getContext('2d')
 
     const run = font.layout(emoji)
-    const glyph = (run.glyphs[0] as ExtendedGlyph).getImageForSize(canvasSize) as {data: Buffer}
+    const glyph = (run.glyphs[0] as ExtendedGlyph).getImageForSize(
+      canvasSize
+    ) as { data: Buffer }
 
     if (glyph?.data) {
       new Promise<Canvas>((resolve, reject) => {
@@ -83,10 +87,11 @@ if (font) {
         }
 
         emojiImg.src = glyph.data
-      }).then((canvas: Canvas ) => {
+      }).then(async (canvas: Canvas) => {
         console.log(`✅ Generated ${id}: ${emoji}`)
         var buffer = canvas.toBuffer()
-        fs.writeFileSync(`public/assets/emoji/${id}.png`, buffer)
+        const image = await sharp(buffer).png({ quality: 75 })
+        await image.toFile(`public/assets/emoji/${id}.png`)
       })
     } else {
       console.log(`Skipping ${id}: ${emoji}`)
