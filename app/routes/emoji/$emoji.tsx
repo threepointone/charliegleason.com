@@ -86,6 +86,16 @@ function generateStyles({ numImages, isAnimated = true }: GenerateStyles) {
         animation: fade-in-and-out 0.2s steps(1, end) forwards;
       }
 
+      @media (prefers-reduced-motion) {
+        image {
+          animation: none;
+        }
+
+        [class^=primary] {
+          opacity: 1;
+        }
+      }
+
       @keyframes fade-in-and-out {
         0% { opacity: 0; }
         10% { opacity: 1; }
