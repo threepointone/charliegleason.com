@@ -17,6 +17,12 @@ $ cd charliegleason.com
 $ npm install
 ```
 
+Also, if you make any changes to the article emojis, or add new ones to the [`emoji-list.ts`](https://github.com/superhighfives/charliegleason.com/blob/main/app/utils/emoji-list.ts) file, you'll need to re-generate images:
+
+```sh
+$ npm run generate:images
+```
+
 This set up uses Wrangler for local development, to emulate the Cloudflare runtime. To get started, run `npm run dev`:
 
 ```sh
@@ -34,7 +40,23 @@ If you don't already have an account, you can [create a Cloudflare account here]
 
 (And just to be sure, the "Build command" should be set to `npm run build`, and the "Build output directory" should be set to `public`.)
 
-## Context
+## Interesting Bits
+
+Probably the most unique thing about the project is the automagic emoji generator, which is housed in the [`$emoji.tsx`](https://github.com/superhighfives/charliegleason.com/blob/main/app/routes/emoji/%24emoji.tsx) file.
+
+It generates an animated SVG, with base64 encoded raster images, on the fly. It has a couple of options available as part of the API, too. You can add the following url params:
+
+| Title      | Value   | Default | Description                                                                                               |
+| ---------- | ------- | ------- | --------------------------------------------------------------------------------------------------------- |
+| `animated` | boolean | true    | Describes whether the SVG animates through a collection of images before landing on the final one         |
+| `detailed` | boolean | true    | Describes whether the SVG includes the time it was generated (as a 12 hour clock) around the outside edge |
+
+You can also pass up to three emoji to the API url to see the generation in real time (the emoji need to be in the [`emoji-list.ts`](https://github.com/superhighfives/charliegleason.com/blob/main/app/utils/emoji-list.ts) file, or used in an article).
+
+Examples:
+- https://charliegleason.com/emoji/💃🐒
+- https://charliegleason.com/emoji/💃🐒?animated=false
+- https://charliegleason.com/emoji/💃🐒?animated=false&detailed=false
 
 ## Development
 
