@@ -125,3 +125,23 @@ html.dark *::selection {
   color: theme('colors.yellow.300');
   background: theme('colors.yellow.900');
 }
+
+/*
+ * Shimmer
+ */
+
+.shimmer {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #ffffffff,
+    #ffffffff,
+    #00000000,
+    #ffffffff,
+    #ffffffff
+  );
+  filter: contrast(1.1);
+  mix-blend-mode: saturation;
+  pointer-events: none;
+}

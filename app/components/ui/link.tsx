@@ -42,30 +42,24 @@ const Link = ({
       return (
         <a
           href={href}
-          className={`${
-            size === 'large' && 'text-lg sm:text-xl'
-          } 
-            font-display bg-gradient-to-r bg-[length:100%_0.1em] bg-bottom bg-no-repeat rounded-sm box-decoration-clone px-1 outline-2 outline-offset-2 outline-yellow-500 grayscale
+          className={`${size === 'large' && 'text-lg sm:text-xl'} 
+            font-display bg-gradient-to-r bg-[length:100%_0.1em] bg-bottom bg-no-repeat rounded-sm box-decoration-clone px-1 outline-2 outline-offset-2 outline-yellow-500
             
-            bg-neutral-100 from-yellow-500 to-yellow-600 [text-shadow:0_0.125em_0_theme('colors.neutral.100')]
-            dark:bg-neutral-900 dark:from-yellow-600 dark:to-yellow-500 dark:[text-shadow:0_0.125em_0_theme('colors.neutral.900')]
+            from-yellow-500 to-yellow-600
+            dark:from-yellow-600 dark:to-yellow-500
             
-            hover:grayscale-0 hover:bg-[length:100%_2px] hover:text-yellow-900 hover:bg-yellow-300 hover:[text-shadow:0_0.125em_0_theme('colors.yellow.300')] 
+            text-yellow-900 bg-yellow-300 [text-shadow:0_0.125em_0_theme('colors.yellow.300')] 
             focus:grayscale-0 focus:bg-[length:100%_2px] focus:text-yellow-900 focus:bg-yellow-300 focus:[text-shadow:0_0.125em_0_theme('colors.yellow.300')] 
             
-            dark:hover:text-yellow-400 dark:hover:bg-yellow-900 dark:hover:[text-shadow:0_0.125em_0_theme('colors.yellow.900')]
+            dark:text-yellow-400 dark:bg-yellow-900 dark:[text-shadow:0_0.125em_0_theme('colors.yellow.900')]
             dark:focus:text-yellow-400 dark:focus:bg-yellow-900 dark:focus:[text-shadow:0_0.125em_0_theme('colors.yellow.900')]
             
             active:outline active:outline-yellow-300 dark:active:outline-yellow-800 active:grayscale-0
             focus-visible:outline
 
-            ${
-              !background && 'bg-none bg-white'
-            }
+            ${!background && 'bg-none bg-yellow-300'}
 
-            ${
-              padding === "large" && 'px-2 py-1'
-            }
+            ${padding === 'large' && 'px-2 py-1'}
           `}
         >
           {icon && (
