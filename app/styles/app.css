@@ -353,13 +353,6 @@ input::-moz-placeholder, textarea::-moz-placeholder {
   /* 2 */
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
-}
-
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -472,8 +465,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   pointer-events: none;
 }
 
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
 .static {
   position: static;
+}
+
+.fixed {
+  position: fixed;
 }
 
 .absolute {
@@ -485,8 +486,25 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .sticky {
-  position: -webkit-sticky;
   position: sticky;
+}
+
+.inset-x-0 {
+  left: 0px;
+  right: 0px;
+}
+
+.inset-y-4 {
+  top: 1rem;
+  bottom: 1rem;
+}
+
+.-top-4 {
+  top: -1rem;
+}
+
+.-left-8 {
+  left: -2rem;
 }
 
 .top-8 {
@@ -604,6 +622,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-full {
   height: 100%;
 }
@@ -618,6 +640,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-8 {
   height: 2rem;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 .w-\[30px\] {
@@ -689,7 +715,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
@@ -1063,6 +1088,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .opacity-0 {
   opacity: 0;
+}
+
+.mix-blend-multiply {
+  mix-blend-mode: multiply;
 }
 
 .shadow-\[0_0_15px_0_rgba\(250\2c 204\2c 21\2c 0\.15\)\2c 0_0_25px_0_rgba\(250\2c 204\2c 21\2c 0\.5\)\2c 0_0_50px_0_rgba\(250\2c 204\2c 21\2c 0\.25\)\] {
@@ -1599,8 +1628,7 @@ html.dark *::selection {
   }
 
   .sm\:\[writing-mode\:vertical-rl\] {
-    -ms-writing-mode: tb-rl;
-        writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
   }
 }
 

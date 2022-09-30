@@ -12,6 +12,7 @@ import Layout from '~/components/ui/layout'
 import Sections from '~/components/ui/sections'
 import Footer from '~/components/sections/footer'
 import tags from '~/utils/tags'
+import Visualisation from '~/components/visualisations/ballpit'
 
 import { projects, articles, features } from '~/data'
 import { useMatches } from '@remix-run/react'
@@ -43,8 +44,13 @@ export default function IndexRoute() {
   const { symbol, photo } = useMatches().find((route) => route.id === 'root')
     ?.data ?? { symbol: '💀', photo: '01' }
 
+  const absolute =
+    'absolute pointer-events-none w-screen h-screen -top-4 -left-8'
+  const fixed = 'fixed w-screen h-screen inset-x-0 inset-y-4'
+
   return (
     <>
+      <Visualisation className={fixed} />
       <Layout>
         <Header symbol={symbol} photo={photo} />
         <Sections>
