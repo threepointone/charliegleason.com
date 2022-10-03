@@ -44,8 +44,6 @@ export default function IndexRoute() {
   const { symbol, photo } = useMatches().find((route) => route.id === 'root')
     ?.data ?? { symbol: '💀', photo: '01' }
 
-  const absolute =
-    'absolute pointer-events-none w-screen h-screen -top-4 -left-8'
   const fixed = 'fixed w-screen h-screen inset-x-0 inset-y-4'
 
   return (

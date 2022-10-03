@@ -3,41 +3,44 @@ import * as THREE from 'three'
 import { useEffect, useLayoutEffect, useMemo } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Physics, usePlane, useSphere } from '@react-three/cannon'
-import {
-  EffectComposer,
-  DepthOfField,
-  Noise,
-} from '@react-three/postprocessing'
+import { useTheme } from '~/utils/theme-provider'
 
 type Props = {
   className: string
   children: ReactNode
 }
 
-const tempColor = new THREE.Color()
-const data = Array.from({ length: 200 }, () => ({
-  color: ['#fffde7', '#fff9c4', '#fff59d', '#fff176'][
-    Math.floor(Math.random() * 4)
-  ],
-  opacity: Math.random(),
-  scale: 0.25 + Math.random(),
-}))
+const Visualisation = ({ className }: Props) => {
+  const [theme] = useTheme()
+  return (
+    <div className={className}>
+      <Canvas orthographic camera={{ position: [0, 0, 100], zoom: 50 }}>
+        <Physics gravity={[0, 50, 0]}>
+          <group position={[0, 0, -10]}>
+            <Mouse />
+            <Borders />
+            <InstancedSpheres theme={theme} />
+          </group>
+        </Physics>
+      </Canvas>
+    </div>
+  )
+}
 
-const Visualisation = ({ className }: Props) => (
-  <div className={className}>
-    <Canvas orthographic camera={{ position: [0, 0, 100], zoom: 50 }}>
-      <Physics gravity={[0, 50, 0]}>
-        <group position={[0, 0, -10]}>
-          <Mouse />
-          <Borders />
-          <InstancedSpheres />
-        </group>
-      </Physics>
-    </Canvas>
-  </div>
-)
+function InstancedSpheres({ count = 200, theme }) {
+  const tempColor = new THREE.Color()
 
-function InstancedSpheres({ count = 200 }) {
+  const colors =
+    theme === 'light'
+      ? ['#fffde7', '#fff9c4', '#fff59d', '#fff176']
+      : ['#000', '#111', '#222', '#333']
+
+  const data = Array.from({ length: 200 }, () => ({
+    color: colors[Math.floor(Math.random() * colors.length - 1)],
+    opacity: Math.random(),
+    scale: 0.25 + Math.random(),
+  }))
+
   const { viewport } = useThree()
   const [ref, api] = useSphere((index) => ({
     mass: data[index].scale * 10,
