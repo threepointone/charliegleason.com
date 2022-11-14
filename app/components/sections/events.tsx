@@ -10,6 +10,7 @@ const Events = () => (
     <Grid>
       <Block id="awards-achievements" title="Awards &amp; Achievements">
         <Items>
+          <Item date="2022" title="Salesforce User Experience (UX) Designer Certification" />
           <Item date="2021" title="Product Hunt, Featured" link={{title: "Pika", href: "https://www.producthunt.com/posts/pika"}} />
           <Item date="2019" title="The Ink Award" link={{title: "Heroku Hanafuda Cards", href: "https://suminagame.com/2019/11/27/choboku-037/"}} />
           <Item date="2017" title="Typewolf, Site of the Day" link={{title: "Charlie Gleason", href: "https://www.typewolf.com/site-of-the-day/charlie-gleason"}} />
