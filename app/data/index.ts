@@ -140,12 +140,6 @@ export const projects = {
       url: 'https://iwillneverletyougo.com/',
     },
     {
-      icon: '🗺️',
-      title: 'Beginnings & Endings',
-      subtitle: 'A musical pyramid scheme',
-      url: 'http://beginnings.wearebrightly.com/',
-    },
-    {
       icon: '🌏',
       title: 'Anatole',
       subtitle: 'Landing page for the orchestral laptop maestro',
