@@ -13,11 +13,9 @@ const Introduction = () => {
           Before that I looked after design and front-end development for the
           London-based crowdfunding publisher{' '}
           <Link href="http://unbound.com/">Unbound</Link> and the
-          Melbourne-based social film site Goodfilms, and was the
-          technical lead of the{' '}
-          <Link href="https://www.clemengerbbdo.com.au">
-            Clemenger BBDO
-          </Link>{' '}
+          Melbourne-based social film site Goodfilms, and was the technical lead
+          of the{' '}
+          <Link href="https://www.clemengerbbdo.com.au">Clemenger BBDO</Link>{' '}
           ad&nbsp;agency.
         </p>
         <p>
@@ -38,8 +36,8 @@ const Introduction = () => {
       <div className="space-y-4 text-sm text-neutral-800 dark:text-neutral-400">
         <p>
           In my spare time I like to work on micro projects, from{' '}
-          <Link href="https://sandpitjs.com/">tools for creative coding</Link>
-          , to{' '}
+          <Link href="https://sandpitjs.com/">tools for creative coding</Link>,
+          to{' '}
           <Link href="http://tweetflight.wearebrightly.com/">
             tweet-based music videos
           </Link>
@@ -47,17 +45,12 @@ const Introduction = () => {
           <Link href="https://superhighfives.com/pika">
             design-focused macOS apps
           </Link>
-          . I also sometimes{' '}
-          <Link href="https://medium.com/superhighfives">
-            write about development
-          </Link>
-          , contribute to{' '}
-          <Link href="http://github.com/superhighfives/">open source</Link>,
-          and share{' '}
-          <Link href="https://dribbble.com/superhighfives">
-            visual resources
-          </Link>
-          .
+          . I also sometimes write about{' '}
+          <Link href="https://medium.com/superhighfives">development</Link>,
+          contribute to{' '}
+          <Link href="http://github.com/superhighfives/">open source</Link>, and
+          share{' '}
+          <Link href="https://dribbble.com/superhighfives">resources</Link>.
         </p>
         <p>
           My work has been featured by Google’s Creative Sandbox, and has
