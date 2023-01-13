@@ -47,7 +47,7 @@ const Introduction = () => {
           <Link href="https://superhighfives.com/pika">
             design-focused macOS apps
           </Link>
-          . I also like to{' '}
+          . I also sometimes{' '}
           <Link href="https://medium.com/superhighfives">
             write about development
           </Link>
