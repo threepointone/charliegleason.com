@@ -15,7 +15,7 @@ const Introduction = () => {
           <Link href="http://unbound.com/">Unbound</Link> and the
           Melbourne-based social film site Goodfilms, and was the
           technical lead of the{' '}
-          <Link href="https://www.clemengerbbdo.com.au/en">
+          <Link href="https://www.clemengerbbdo.com.au">
             Clemenger BBDO
           </Link>{' '}
           ad&nbsp;agency.
