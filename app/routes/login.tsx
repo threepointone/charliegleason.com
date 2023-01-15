@@ -23,18 +23,15 @@ export async function action({ request, context }: ActionArgs) {
   const redirectTo = safeRedirect(formData.get('redirectTo'))
 
   const password = formData.get('password')
-
-  // Perform form validation
-  // For example, check the email is a valid email
-  // Return the errors if there are any
-
-  // const user = await verifyLogin(email, password)
   const user = password === context.AUTH_PASSWORD ? { id: 'guest' } : false
 
-  // If no user is returned, return the error
-
   if (!user) {
-    return json({ error: 'Invalid login' }, { status: 401 })
+    // return json({ error: 'Invalid login' }, { status: 401 })
+    const searchParams = new URLSearchParams([
+      ['redirectTo', redirectTo],
+      ['error', 'unauthorized'],
+    ])
+    throw redirect(`/login?${searchParams}`)
   }
 
   return createUserSession({
@@ -47,9 +44,12 @@ export async function action({ request, context }: ActionArgs) {
 export default function LoginPage() {
   const [searchParams] = useSearchParams()
   const redirectTo = searchParams.get('redirectTo') || '/'
+  const unauthorized = searchParams.get('error') === 'unauthorized'
+  console.log(unauthorized)
 
   return (
     <Form method="post">
+      {unauthorized ? <p>Nope</p> : null}
       <label htmlFor="password">Password</label>
       <input
         id="password"
