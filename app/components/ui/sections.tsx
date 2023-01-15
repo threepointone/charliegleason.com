@@ -7,8 +7,9 @@ type Props = {
 
 const Sections = ({ children }: Props) => (
   <div className="space-y-12">
-    {children &&
-      children.map((child, i) => [<HorizontalRule key={i} />, child])}
+    {children.length > 1
+      ? children.map((child, i) => [<HorizontalRule key={i} />, child])
+      : children}
   </div>
 )
 export default Sections

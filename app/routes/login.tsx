@@ -8,6 +8,29 @@ import { createUserSession } from '~/session.server'
 
 import { safeRedirect } from '~/utils/user'
 
+import type { MetaFunction } from '@remix-run/cloudflare'
+import type { LoaderFunction } from '@remix-run/cloudflare'
+
+import Header from '~/components/ui/header'
+import NotFound from '~/components/sections/not-found'
+import Selected from '~/components/sections/selected'
+import Links from '~/components/sections/links'
+import Layout from '~/components/ui/layout'
+import Sections from '~/components/ui/sections'
+import Footer from '~/components/sections/footer'
+
+import tags from '~/utils/tags'
+
+export const meta: MetaFunction = () => {
+  return tags({
+    title: 'Login! Charlie Gleason is hiding!',
+    description:
+      'Designer, developer, creative coder, musician, and login page enthusiast.',
+    image: 'https://charliegleason.com/social-error.png',
+    emoji: '🙈',
+  })
+}
+
 export async function loader({ request }: LoaderArgs) {
   const userId = await getUserId(request)
 
@@ -15,7 +38,7 @@ export async function loader({ request }: LoaderArgs) {
     return redirect('/')
   }
 
-  return json({})
+  return json(null, { status: 400 })
 }
 
 export async function action({ request, context }: ActionArgs) {
@@ -26,7 +49,6 @@ export async function action({ request, context }: ActionArgs) {
   const user = password === context.AUTH_PASSWORD ? { id: 'guest' } : false
 
   if (!user) {
-    // return json({ error: 'Invalid login' }, { status: 401 })
     const searchParams = new URLSearchParams([
       ['redirectTo', redirectTo],
       ['error', 'unauthorized'],
@@ -45,20 +67,28 @@ export default function LoginPage() {
   const [searchParams] = useSearchParams()
   const redirectTo = searchParams.get('redirectTo') || '/'
   const unauthorized = searchParams.get('error') === 'unauthorized'
-  console.log(unauthorized)
 
   return (
-    <Form method="post">
-      {unauthorized ? <p>Nope</p> : null}
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        autoComplete="current-password"
-      />
-      <input type="hidden" name="redirectTo" value={redirectTo} />
-      <button type="submit">Log in</button>
-    </Form>
+    <>
+      <Layout>
+        <Header symbol="🙈" photo="01" small />
+        <Sections>
+          <Form method="post">
+            {unauthorized ? <p>Nope</p> : null}
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+            />
+            <input type="hidden" name="redirectTo" value={redirectTo} />
+            <button type="submit">Log in</button>
+          </Form>
+          <Links />
+        </Sections>
+        <Footer />
+      </Layout>
+    </>
   )
 }
