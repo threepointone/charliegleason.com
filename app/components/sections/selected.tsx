@@ -27,7 +27,7 @@ type Note = {
   source: string
 }
 
-const Selected = ({ sections }: Props) => {
+export default function Selected({ sections }: Props) {
   return (
     <>
       {sections.map((section) => (
@@ -107,5 +107,3 @@ const Selected = ({ sections }: Props) => {
     </>
   )
 }
-
-export default Selected

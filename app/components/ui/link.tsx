@@ -12,7 +12,7 @@ type Props = {
   children: ReactNode
 }
 
-const Link = ({
+export default function Link({
   type = 'default',
   size = 'default',
   padding = 'default',
@@ -20,7 +20,7 @@ const Link = ({
   icon,
   href,
   children,
-}: Props) => {
+}: Props) {
   switch (type) {
     case 'text':
       return (
@@ -42,9 +42,7 @@ const Link = ({
       return (
         <a
           href={href}
-          className={`${
-            size === 'large' && 'text-lg sm:text-xl'
-          } 
+          className={`${size === 'large' && 'text-lg sm:text-xl'} 
             font-display bg-gradient-to-r bg-[length:100%_0.1em] bg-bottom bg-no-repeat rounded-sm box-decoration-clone px-1 outline-2 outline-offset-2 outline-yellow-500 grayscale
             
             bg-neutral-100 from-yellow-500 to-yellow-600 [text-shadow:0_0.125em_0_theme('colors.neutral.100')]
@@ -59,13 +57,9 @@ const Link = ({
             active:outline active:outline-yellow-300 dark:active:outline-yellow-800 active:grayscale-0
             focus-visible:outline
 
-            ${
-              !background && 'bg-none bg-white'
-            }
+            ${!background && 'bg-none bg-white'}
 
-            ${
-              padding === "large" && 'px-2 py-1'
-            }
+            ${padding === 'large' && 'px-2 py-1'}
           `}
         >
           {icon && (
@@ -78,5 +72,3 @@ const Link = ({
       )
   }
 }
-
-export default Link

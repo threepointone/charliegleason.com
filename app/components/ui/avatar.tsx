@@ -6,7 +6,7 @@ type Props = {
   small?: boolean
 }
 
-const Avatar = ({ symbol = '🙈', photo = false, small = false }: Props) => {
+export default function Avatar({ symbol = '🙈', photo = false, small = false }: Props) {
   return (
     <>
       <a
@@ -39,5 +39,3 @@ const Avatar = ({ symbol = '🙈', photo = false, small = false }: Props) => {
     </>
   )
 }
-
-export default Avatar

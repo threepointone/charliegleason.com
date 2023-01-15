@@ -1,6 +1,6 @@
 import Link from '~/components/ui/link'
 
-const Introduction = () => {
+export default function Introduction() {
   return (
     <div className="space-y-6">
       <div className="space-y-4">
@@ -72,5 +72,3 @@ const Introduction = () => {
     </div>
   )
 }
-
-export default Introduction

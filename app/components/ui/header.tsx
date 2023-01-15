@@ -7,7 +7,7 @@ type Props = {
   small?: boolean
 }
 
-const Header = (props:Props) => {
+export default function Header(props: Props) {
   return (
     <div
       className={`space-y-4 ${!props.small && 'pt-24 sm:pt-48'} ${
@@ -43,5 +43,3 @@ const Header = (props:Props) => {
     </div>
   )
 }
-
-export default Header

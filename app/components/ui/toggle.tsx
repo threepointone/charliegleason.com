@@ -7,7 +7,7 @@
 import { Theme, useTheme } from '~/utils/theme-provider'
 import Icon, { DarkMode } from '~/components/ui/icon'
 
-const Toggle = () => {
+export default function Toggle() {
   const [theme, setTheme] = useTheme()
 
   const toggleTheme = () => {
@@ -32,5 +32,3 @@ const Toggle = () => {
     </button>
   )
 }
-
-export default Toggle

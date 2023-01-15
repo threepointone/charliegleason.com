@@ -4,10 +4,11 @@ import Item from '~/components/ui/events/item'
 import Education from '~/components/ui/events/education'
 import Grid from '~/components/ui/grid'
 
-const Events = () => (
-  <>
-    {/* prettier-ignore */}
-    <Grid>
+export default function Events() {
+  return (
+    <>
+      {/* prettier-ignore */}
+      <Grid>
       <Block id="awards-achievements" title="Awards &amp; Achievements">
         <Items>
           <Item date="2022" title="Salesforce User Experience (UX) Designer Certification" />
@@ -86,7 +87,6 @@ const Events = () => (
           </Block>    
       </div>
     </Grid>
-  </>
-)
-
-export default Events
+    </>
+  )
+}
