@@ -1,6 +1,4 @@
 import type { ActionArgs, LoaderArgs } from '@remix-run/cloudflare'
-import { redirect } from '@remix-run/cloudflare'
-
 import { logout } from '~/session.server'
 
 export async function action({ request }: ActionArgs) {

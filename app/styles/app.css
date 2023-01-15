@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com
+! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -30,6 +30,7 @@
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
 */
 
 html {
@@ -44,6 +45,8 @@ html {
   /* 3 */
   font-family: -apple-system,  BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   /* 4 */
+  font-feature-settings: normal;
+  /* 5 */
 }
 
 /*
@@ -186,6 +189,8 @@ textarea {
   font-family: inherit;
   /* 1 */
   font-size: 100%;
+  /* 1 */
+  font-weight: inherit;
   /* 1 */
   line-height: inherit;
   /* 1 */
@@ -353,13 +358,6 @@ input::-moz-placeholder, textarea::-moz-placeholder {
   /* 2 */
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
-}
-
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -415,15 +413,62 @@ video {
   height: auto;
 }
 
-/*
-Ensure the default browser behavior of the `hidden` attribute.
-*/
+/* Make elements with the HTML hidden attribute stay hidden by default */
 
 [hidden] {
   display: none;
 }
 
 *, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -485,7 +530,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .sticky {
-  position: -webkit-sticky;
   position: sticky;
 }
 
@@ -689,7 +733,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
@@ -875,12 +918,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .from-yellow-600 {
   --tw-gradient-from: #ca8a04;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(202 138 4 / 0));
+  --tw-gradient-to: rgb(202 138 4 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .from-yellow-500 {
   --tw-gradient-from: #eab308;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(234 179 8 / 0));
+  --tw-gradient-to: rgb(234 179 8 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .to-transparent {
@@ -1097,9 +1142,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .transition-colors {
-  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -1426,12 +1469,14 @@ html.dark *::selection {
 
 .dark .dark\:from-yellow-500 {
   --tw-gradient-from: #eab308;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(234 179 8 / 0));
+  --tw-gradient-to: rgb(234 179 8 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .dark .dark\:from-yellow-600 {
   --tw-gradient-from: #ca8a04;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(202 138 4 / 0));
+  --tw-gradient-to: rgb(202 138 4 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .dark .dark\:to-yellow-500 {
@@ -1599,8 +1644,7 @@ html.dark *::selection {
   }
 
   .sm\:\[writing-mode\:vertical-rl\] {
-    -ms-writing-mode: tb-rl;
-        writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
   }
 }
 
