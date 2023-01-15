@@ -18,7 +18,7 @@ export async function loader({ request }: LoaderArgs) {
   return json({})
 }
 
-export async function action({ request }: ActionArgs) {
+export async function action({ request, context }: ActionArgs) {
   const formData = await request.formData()
   const redirectTo = safeRedirect(formData.get('redirectTo'))
 
@@ -29,7 +29,7 @@ export async function action({ request }: ActionArgs) {
   // Return the errors if there are any
 
   // const user = await verifyLogin(email, password)
-  const user = password === 'puppies' ? { id: 'guest' } : false
+  const user = password === context.AUTH_PASSWORD ? { id: 'guest' } : false
 
   // If no user is returned, return the error
 

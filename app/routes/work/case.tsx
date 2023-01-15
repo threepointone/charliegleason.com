@@ -3,7 +3,6 @@ import { json } from '@remix-run/cloudflare'
 import { requireUserId } from '~/session.server'
 import { useLoaderData } from '@remix-run/react'
 import Link from '~/components/ui/link'
-import type { User } from '~/models/user.server'
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await requireUserId(request)
