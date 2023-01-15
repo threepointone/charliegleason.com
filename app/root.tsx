@@ -32,6 +32,8 @@ import {
   useTheme,
 } from '~/utils/theme-provider'
 
+import { getUser } from './session.server'
+
 export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: tailwind },
@@ -65,6 +67,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     theme: themeSession.getTheme(),
     symbol: sampleSize(emojiList, Math.ceil(Math.random() * 3)).join(''),
     photo: `0${random(1, 4)}`,
+    user: await getUser(request),
   }
 
   return data
