@@ -1,4 +1,4 @@
-import type { MetaFunction, LinksFunction } from '@remix-run/cloudflare'
+import type { MetaFunction, LoaderArgs } from '@remix-run/cloudflare'
 import type { LoaderData } from '~/root'
 import type { DynamicLinksFunction } from 'remix-utils'
 
@@ -41,8 +41,9 @@ export const meta: MetaFunction = () => {
 }
 
 export default function IndexRoute() {
-  const { symbol, photo } = useMatches().find((route) => route.id === 'root')
-    ?.data ?? { symbol: '💀', photo: '01' }
+  const { symbol, photo, user } = useMatches().find(
+    (route) => route.id === 'root'
+  )?.data ?? { symbol: '💀', photo: '01', user: { id: 'unauthenticated' } }
 
   return (
     <>
@@ -61,7 +62,7 @@ export default function IndexRoute() {
           <Quotes />
           <Links />
         </Sections>
-        <Footer />
+        <Footer user={user} />
       </Layout>
     </>
   )

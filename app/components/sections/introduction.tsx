@@ -1,4 +1,5 @@
 import Link from '~/components/ui/link'
+import { EMOJI_URL } from '~/constants'
 
 export default function Introduction() {
   return (
@@ -26,12 +27,13 @@ export default function Introduction() {
         <p>I cannot skateboard. I tried, but it was a whole&nbsp;thing.</p>
       </div>
 
-      <div
-        aria-hidden="true"
-        className="dark:text-neutral-700 text-neutral-300 select-none"
-      >
-        • • •
-      </div>
+      <img
+        className="select-none"
+        alt=""
+        width="32"
+        height="32"
+        src={`${EMOJI_URL}🤙?animated=false`}
+      />
 
       <div className="space-y-4 text-sm text-neutral-800 dark:text-neutral-400">
         <p>

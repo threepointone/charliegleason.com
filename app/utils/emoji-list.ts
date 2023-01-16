@@ -72,6 +72,7 @@ const art = [
   '📚',
   '🐖',
   '🐀',
+  '🤙',
 ]
 
 export default [...content, ...art] as string[]

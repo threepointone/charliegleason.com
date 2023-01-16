@@ -9,7 +9,7 @@ import Layout from '~/components/ui/layout'
 import Sections from '~/components/ui/sections'
 import Footer from '~/components/sections/footer'
 
-import { projects } from '~/data'
+import { projects, articles, features } from '~/data'
 import tags from '~/utils/tags'
 
 import { json } from '@remix-run/cloudflare'
@@ -31,11 +31,11 @@ export const loader: LoaderFunction = async () => {
 export default function NotFoundRoute() {
   return (
     <>
-      <Layout>
+      <Layout wide>
         <Header symbol="🙈" photo="01" small />
         <Sections>
           <NotFound />
-          <Selected sections={[projects]} />
+          <Selected sections={[projects, articles, features]} />
           <Links />
         </Sections>
         <Footer />

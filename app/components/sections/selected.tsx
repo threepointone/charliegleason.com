@@ -29,14 +29,12 @@ type Note = {
 
 export default function Selected({ sections }: Props) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 md:space-y-0 xl:grid-cols-3 gap-12">
+    <div className="grid grid-cols-1 sm:space-y-0 sm:grid-cols-3 gap-12">
       {sections.map((section) => (
         <Fragment key={section.title}>
-          <div className="sm:flex">
-            <h3 className="font-display uppercase leading-none tracking-wider text-xs text-yellow-700 dark:text-yellow-500 pr-8 flex-none sm:[writing-mode:vertical-rl] whitespace-no-wrap mb-8 sm:mb-0">
-              <span className="sticky" style={{ top: '3rem' }}>
-                Selected {section.title}
-              </span>
+          <div>
+            <h3 className="font-display uppercase leading-none tracking-wider text-xs text-yellow-700 dark:text-yellow-500 pr-8 mb-8">
+              Selected {section.title}
             </h3>
 
             <div className="space-y-8">
@@ -89,10 +87,7 @@ export default function Selected({ sections }: Props) {
                           <circle cx="12" cy="12" r="8"></circle>
                         </svg>
 
-                        <a
-                          href={note.slug}
-                          className="text-sm sm:text-sm truncate sm:[overflow:unset] sm:[text-overflow:unset] sm:[white-space:unset]"
-                        >
+                        <a href={note.slug} className="text-sm truncate">
                           {note.title}
                         </a>
                       </div>

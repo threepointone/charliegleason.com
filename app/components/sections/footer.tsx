@@ -1,6 +1,6 @@
 import Link from '~/components/ui/link'
 
-export default function Footer() {
+export default function Footer({ user }: { user?: { id: string } }) {
   return (
     <div className="text-xxs text-neutral-600 dark:text-neutral-400 max-w-lg pb-16 sm:pb-20 md:pb-36 pt-24 sm:pt-48 space-y-2">
       <p>
@@ -36,6 +36,14 @@ export default function Footer() {
         </Link>
         .
       </p>
+      {user && user.id === 'guest' ? (
+        <p className="text-neutral-400 dark:text-neutral-600">
+          You are currently logged in as a guest.{' '}
+          <Link type="text" href="/logout">
+            Logout
+          </Link>
+        </p>
+      ) : null}
     </div>
   )
 }

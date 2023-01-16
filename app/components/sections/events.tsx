@@ -9,7 +9,7 @@ export default function Events() {
     <>
       {/* prettier-ignore */}
       <Grid>
-      <div className="space-y-8">
+        <div className="space-y-8">
           <Block id="education" title="Education">
             <Education title="Masters of Computer Science" school="RMIT University" location="Melbourne" dates="2011 - incomplete" />
             <Education title="Bachelor of Design (Multimedia Design)" school="Swinburne School of Design" location="Melbourne" dates="2004 - 2007" postscript="First Class Honours" />
@@ -55,7 +55,7 @@ export default function Events() {
           </Items>
         </Block>
 
-        <div className="space-y-8">
+        <div className="!mt-0 space-y-8">
           <Block id="awards-achievements-cont">
             <Item date="2010" title="AIMIA, Nomination for Effectiveness, Pop What You’re Not" />
             <Item date="2010" title="ADMA, Bronze for Art Direction / Craft, Pop What You’re Not" />

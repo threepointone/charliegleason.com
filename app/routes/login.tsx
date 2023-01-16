@@ -10,13 +10,10 @@ import { safeRedirect } from '~/utils/user'
 
 import type { MetaFunction } from '@remix-run/cloudflare'
 
-import Header from '~/components/ui/header'
-import Links from '~/components/sections/links'
-import Layout from '~/components/ui/layout'
-import Sections from '~/components/ui/sections'
-import Footer from '~/components/sections/footer'
+import Avatar from '~/components/ui/avatar'
 
 import tags from '~/utils/tags'
+import HorizontalRule from '~/components/ui/hr'
 
 export const meta: MetaFunction = () => {
   return tags({
@@ -65,28 +62,43 @@ export default function LoginPage() {
   const [searchParams] = useSearchParams()
   const redirectTo = searchParams.get('redirectTo') || '/'
   const unauthorized = searchParams.get('error') === 'unauthorized'
+  const symbol = unauthorized ? '💀' : '🤙'
 
   return (
     <>
-      <Layout>
-        <Header symbol="🙈" photo="01" small />
-        <Sections>
-          <Form method="post">
-            {unauthorized ? <p>Nope</p> : null}
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-            />
-            <input type="hidden" name="redirectTo" value={redirectTo} />
-            <button type="submit">Log in</button>
-          </Form>
-          <Links />
-        </Sections>
-        <Footer />
-      </Layout>
+      <div className="grid place-items-center h-full">
+        <div className="flex items-center space-x-4">
+          <div className="flex">
+            <Avatar symbol={symbol} photo="01" />
+          </div>
+          <div className="max-w-xs space-y-0">
+            <hgroup className="inline-flex whitespace-nowrap space-x-1 font-display uppercase tracking-wider text-xs">
+              <h1>C#@rl!e G/3as0n</h1>
+              <h2 className="bg-yellow-800 dark:bg-yellow-300 bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 dark:from-yellow-500 to-transparent">
+                needs you to log in
+              </h2>
+            </hgroup>
+            <div className="space-y-4">
+              <h1 className="font-mono text-lg">This is a protected area.</h1>
+              <HorizontalRule />
+              <Form method="post" className="h-full">
+                <label htmlFor="password">Password</label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  className={`rounded-sm border-2 ${
+                    unauthorized ? 'border-red-500' : 'border-transparent'
+                  }`}
+                />
+                <input type="hidden" name="redirectTo" value={redirectTo} />
+                <button type="submit">Log in</button>
+              </Form>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
