@@ -17,9 +17,11 @@ import { projects, articles, features } from '~/data'
 import { useMatches, useRouteLoaderData } from '@remix-run/react'
 import { EMOJI_URL } from '../constants'
 
-let dynamicLinks: DynamicLinksFunction<LoaderData> = ({ data }) => {
+let dynamicLinks: DynamicLinksFunction<LoaderData> = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { symbol } = useRouteLoaderData('root') ?? { symbol: '💀' }
+  const { symbol }: { symbol?: string } = useRouteLoaderData('root') ?? {
+    symbol: '💀',
+  }
   return [
     {
       rel: 'icon',
@@ -44,13 +46,19 @@ export default function IndexRoute() {
 
   return (
     <>
-      <Layout>
+      <Layout wide>
         <Header symbol={symbol} photo={photo} />
         <Sections>
-          <Introduction />
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            <div className="lg:col-span-2">
+              <Introduction />
+            </div>
+            <div className="lg:col-span-3">
+              <Events />
+            </div>
+          </div>
           <Selected sections={[projects, articles, features]} />
           <Quotes />
-          <Events />
           <Links />
         </Sections>
         <Footer />

@@ -8,17 +8,25 @@ type Props = {
     title: string
     href: string
   }
+  stack?: boolean
 }
 
-export default function Item({ date, title, link }: Props) {
+export default function Item({ date, title, link, stack }: Props) {
+  const classes = stack ? 'flex flex-col' : 'flex'
   return (
-    <li className="flex gap-2">
-      {date && <Date date={date} />}
+    <li className={`${classes} gap-2`}>
+      {date && !stack && <Date date={date} />}
       <div>
         {title}
         {link && (
           <>
             , <Link href={link.href}>{link.title}</Link>
+          </>
+        )}
+        {date && stack && (
+          <>
+            <br />
+            <Date date={date} />
           </>
         )}
       </div>

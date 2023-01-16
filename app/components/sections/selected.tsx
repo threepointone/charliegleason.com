@@ -29,7 +29,7 @@ type Note = {
 
 export default function Selected({ sections }: Props) {
   return (
-    <>
+    <div className="grid grid-cols-1 md:grid-cols-2 md:space-y-0 xl:grid-cols-3 gap-12">
       {sections.map((section) => (
         <Fragment key={section.title}>
           <div className="sm:flex">
@@ -91,7 +91,7 @@ export default function Selected({ sections }: Props) {
 
                         <a
                           href={note.slug}
-                          className="text-sm sm:text-sm truncate"
+                          className="text-sm sm:text-sm truncate sm:[overflow:unset] sm:[text-overflow:unset] sm:[white-space:unset]"
                         >
                           {note.title}
                         </a>
@@ -104,6 +104,6 @@ export default function Selected({ sections }: Props) {
           </div>
         </Fragment>
       ))}
-    </>
+    </div>
   )
 }
