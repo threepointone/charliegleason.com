@@ -9,11 +9,8 @@ import { createUserSession } from '~/session.server'
 import { safeRedirect } from '~/utils/user'
 
 import type { MetaFunction } from '@remix-run/cloudflare'
-import type { LoaderFunction } from '@remix-run/cloudflare'
 
 import Header from '~/components/ui/header'
-import NotFound from '~/components/sections/not-found'
-import Selected from '~/components/sections/selected'
 import Links from '~/components/sections/links'
 import Layout from '~/components/ui/layout'
 import Sections from '~/components/ui/sections'
@@ -31,8 +28,8 @@ export const meta: MetaFunction = () => {
   })
 }
 
-export async function loader({ request }: LoaderArgs) {
-  const userId = await getUserId(request)
+export async function loader({ request, context }: LoaderArgs) {
+  const userId = await getUserId(request, context)
 
   if (userId) {
     return redirect('/')
@@ -60,6 +57,7 @@ export async function action({ request, context }: ActionArgs) {
     request,
     userId: user.id,
     redirectTo,
+    context,
   })
 }
 

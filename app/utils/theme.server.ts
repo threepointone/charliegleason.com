@@ -4,31 +4,22 @@
  * with Remix (https://mattstobbs.com/remix-dark-mode)
  */
 
-import { createCookieSessionStorage } from '@remix-run/cloudflare'
+import type { AppLoadContext } from '@remix-run/cloudflare'
+import { getSessionStorage, getSession } from '~/session.server'
 
 import type { Theme } from './theme-provider'
 import { isTheme } from './theme-provider'
 
-const themeStorage = createCookieSessionStorage({
-  cookie: {
-    name: 'charlie_gleason_dot_com_remix',
-    secure: true,
-    secrets: ['Secure, but with puppies!'],
-    sameSite: 'lax',
-    path: '/',
-    httpOnly: true,
-  },
-})
-
-async function getThemeSession(request: Request) {
-  const session = await themeStorage.getSession(request.headers.get('Cookie'))
+async function getThemeSession(request: Request, context: AppLoadContext) {
+  const sessionStorage = getSessionStorage(context)
+  const session = await getSession(request, context)
   return {
     getTheme: () => {
       const themeValue = session.get('theme')
       return isTheme(themeValue) ? themeValue : null
     },
     setTheme: (theme: Theme) => session.set('theme', theme),
-    commit: () => themeStorage.commitSession(session),
+    commit: () => sessionStorage.commitSession(session),
   }
 }
 

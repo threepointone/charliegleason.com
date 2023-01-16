@@ -4,8 +4,8 @@ import { requireUserId } from '~/session.server'
 import { useLoaderData } from '@remix-run/react'
 import Link from '~/components/ui/link'
 
-export async function loader({ request }: LoaderArgs) {
-  const userId = await requireUserId(request)
+export async function loader({ request, context }: LoaderArgs) {
+  const userId = await requireUserId(request, context)
   return json({ userId })
 }
 

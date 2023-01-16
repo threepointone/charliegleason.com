@@ -33,6 +33,7 @@ import {
 } from '~/utils/theme-provider'
 
 import { getUser } from './session.server'
+import type { User } from './models/user.server'
 
 export const links: LinksFunction = () => {
   return [
@@ -58,16 +59,17 @@ export type LoaderData = {
   theme: Theme | null
   symbol: string
   photo: string
+  user: User
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const themeSession = await getThemeSession(request)
+export const loader: LoaderFunction = async ({ request, context }) => {
+  const themeSession = await getThemeSession(request, context)
 
   const data: LoaderData = {
     theme: themeSession.getTheme(),
     symbol: sampleSize(emojiList, Math.ceil(Math.random() * 3)).join(''),
     photo: `0${random(1, 4)}`,
-    user: await getUser(request),
+    user: await getUser(request, context),
   }
 
   return data
