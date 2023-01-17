@@ -13,7 +13,6 @@ html {
 body {
   color: theme('colors.neutral.900');
   background: theme('colors.white');
-  color-scheme: light;
 }
 
 /*

@@ -82,7 +82,9 @@ export default function LoginPage() {
               <h1 className="font-mono text-lg">This is a protected area.</h1>
               <HorizontalRule />
               <Form method="post" className="h-full">
-                <label htmlFor="password">Password</label>
+                <label className="sr-only" htmlFor="password">
+                  Password
+                </label>
                 <input
                   id="password"
                   name="password"

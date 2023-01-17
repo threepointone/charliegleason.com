@@ -68,7 +68,10 @@ export const loader: LoaderFunction = async ({ request, context }) => {
   const data: LoaderData = {
     theme: themeSession.getTheme(),
     symbol: sampleSize(emojiList, Math.ceil(Math.random() * 3)).join(''),
-    photo: `0${random(1, 4)}`,
+    photo: `${random(1, 10).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    })}`,
     user: await getUser(request, context),
   }
 
