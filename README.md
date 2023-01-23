@@ -17,10 +17,21 @@ $ cd charliegleason.com
 $ npm install
 ```
 
+Copy and fill in the required environment variables:
+
+```sh
+$ mv .dev.vars.sample .dev.vars
+```
+
 Also, if you make any changes to the article emojis, or add new ones to the [`emoji-list.ts`](https://github.com/superhighfives/charliegleason.com/blob/main/app/utils/emoji-list.ts) file, you'll need to re-generate images:
 
 ```sh
 $ npm run generate:images
+```
+
+You may also need to install the [dependencies for canvas](https://github.com/Automattic/node-canvas#installation) with homebrew:
+```sh
+$ brew install pkg-config cairo pango libpng jpeg giflib librsvg pixman
 ```
 
 This set up uses Wrangler for local development, to emulate the Cloudflare runtime. To get started, run `npm run dev`:
