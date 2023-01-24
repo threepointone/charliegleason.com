@@ -58,6 +58,7 @@ export default function IndexRoute() {
               <Events />
             </div>
           </div>
+          <div className="py-64 bg-yellow-100">Case Studies</div>
           <Selected sections={[projects, articles, features]} />
           <Quotes />
           <Links />
