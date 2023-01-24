@@ -10,7 +10,7 @@ const Events = () => (
     <Grid>
       <Block id="awards-achievements" title="Awards &amp; Achievements">
         <Items>
-          <Item date="2023" title="Product Hunt, Nomination for the 2022 Golden Kitty Awards" link={{title: "Pika", href: "https://www.producthunt.com/posts/pika"}} />
+          <Item date="2023" title="Product Hunt, Runner Up in the 2022 Golden Kitty Awards" link={{title: "Pika", href: "https://www.producthunt.com/golden-kitty-awards/hall-of-fame?year=2022"}} />
           <Item date="2022" title="Salesforce User Experience (UX) Designer Certification" />
           <Item date="2021" title="Product Hunt, Featured" link={{title: "Pika", href: "https://www.producthunt.com/posts/pika"}} />
           <Item date="2019" title="The Ink Award" link={{title: "Heroku Hanafuda Cards", href: "https://suminagame.com/2019/11/27/choboku-037/"}} />
