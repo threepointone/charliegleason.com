@@ -1,4 +1,4 @@
-import type { MetaFunction, LoaderArgs } from '@remix-run/cloudflare'
+import type { MetaFunction } from '@remix-run/cloudflare'
 import type { LoaderData } from '~/root'
 import type { DynamicLinksFunction } from 'remix-utils'
 

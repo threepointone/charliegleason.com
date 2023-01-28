@@ -61,8 +61,8 @@ export default function Introduction() {
           .
         </p>
         <p>
-          I believe there are very few things that can’t be made easier with
-          good documentation.
+          I believe there are few things more comforting than good
+          documentation.
         </p>
       </div>
     </div>
