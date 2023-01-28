@@ -3,11 +3,10 @@ import type { LoaderData } from '~/root'
 import type { DynamicLinksFunction } from 'remix-utils'
 
 import Header from '~/components/ui/header'
-import Introduction from '~/components/sections/introduction'
+import Overview from '~/components/sections/overview'
 import Selected from '~/components/sections/selected'
 import Links from '~/components/sections/links'
 import Quotes from '~/components/sections/quotes'
-import Events from '~/components/sections/events'
 import Layout from '~/components/ui/layout'
 import Sections from '~/components/ui/sections'
 import Footer from '~/components/sections/footer'
@@ -50,14 +49,7 @@ export default function IndexRoute() {
       <Layout wide>
         <Header symbol={symbol} photo={photo} />
         <Sections>
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-            <div className="lg:col-span-2">
-              <Introduction />
-            </div>
-            <div className="lg:col-span-3">
-              <Events />
-            </div>
-          </div>
+          <Overview />
           <div className="py-64 bg-yellow-100">Case Studies</div>
           <Selected sections={[projects, articles, features]} />
           <Quotes />
