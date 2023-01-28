@@ -12,10 +12,11 @@ export async function loader({ request, context }: LoaderArgs) {
 export default function CasePage() {
   const data = useLoaderData<typeof loader>()
   return (
-    <div>
+    <div className="[outline-offset:-100px]">
       <h1>Private Area</h1>
       <p>Logged in as {data.userId}</p>
       <Link href="/logout">Logout</Link>
+      <Link href="/#case-studies">Back</Link>
     </div>
   )
 }
