@@ -1,5 +1,5 @@
-import { Fragment } from 'react'
 import Link from '~/components/ui/link'
+import { Fragment } from 'react'
 import { EMOJI_URL } from '~/constants'
 
 type Props = {
@@ -87,9 +87,9 @@ export default function Selected({ sections }: Props) {
                           <circle cx="12" cy="12" r="8"></circle>
                         </svg>
 
-                        <a href={note.slug} className="text-sm truncate">
+                        <Link href={note.slug} type="text">
                           {note.title}
-                        </a>
+                        </Link>
                       </div>
                     )
                   })}

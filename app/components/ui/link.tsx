@@ -27,11 +27,11 @@ export default function Link({
         <a
           href={href}
           className={`
-            transition-colors outline-2 outline-offset-1 rounded-sm border-b border-current mx-0.5
-            hover:text-neutral-900 dark:hover:text-neutral-100
-            focus:text-neutral-900 dark:focus:text-neutral-100
-            active:text-neutral-900 dark:active:text-neutral-100           
-            focus-visible:outline focus-visible:outline-neutral-400 focus-visible:dark:outline-neutral-600
+            transition-colors outline-2 outline-offset-2 rounded-sm border-b border-neutral-900/25 dark:border-neutral-100/25 mx-0.5
+            hover:text-yellow-600 dark:hover:text-yellow-400 hover:border-current dark:hover:border-current
+            focus:text-yellow-600 dark:focus:text-yellow-400 focus:border-current dark:focus:border-current
+            active:text-yellow-600 dark:active:text-yellow-400 active:border-current dark:active:border-current
+            focus-visible:outline focus-visible:outline-yellow-600 focus-visible:dark:outline-yellow-400
           `}
         >
           {children}

@@ -21,7 +21,12 @@ export default function Header(props: Props) {
       <hgroup className="font-display uppercase tracking-wider text-xs">
         <a
           href="/"
-          className="relative hover:opacity-80 active:opacity-80 transition-opacity block w-64 sm:w-80 z-10 -mt-6 sm:-mt-8 ml-0 sm:-ml-4 lg:-ml-12 mb-2 lg:mb-0 max-w-full"
+          className={`relative block transition-opacity
+                      w-64 sm:w-80 z-10 -mt-6 sm:-mt-8 ml-0 sm:-ml-4 lg:-ml-12 mb-2 lg:mb-0 max-w-full
+                      hover:opacity-80
+                      active:opacity-80
+                      outline-2 outline-offset-2
+                      focus-visible:outline focus-visible:outline-yellow-600 focus-visible:dark:outline-yellow-400`}
         >
           <img
             alt=""

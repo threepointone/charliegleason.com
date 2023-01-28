@@ -4,6 +4,7 @@ import type { DynamicLinksFunction } from 'remix-utils'
 
 import Header from '~/components/ui/header'
 import Overview from '~/components/sections/overview'
+import Work from '~/components/sections/work'
 import Selected from '~/components/sections/selected'
 import Links from '~/components/sections/links'
 import Quotes from '~/components/sections/quotes'
@@ -50,7 +51,7 @@ export default function IndexRoute() {
         <Header symbol={symbol} photo={photo} />
         <Sections>
           <Overview />
-          <div className="py-64 bg-yellow-100">Case Studies</div>
+          <Work />
           <Selected sections={[projects, articles, features]} />
           <Quotes />
           <Links />

@@ -1,5 +1,5 @@
 import Link from '~/components/ui/link'
-import { EMOJI_URL } from '~/constants'
+import HorizontalRule from '~/components/ui/hr'
 
 export default function Introduction() {
   return (
@@ -27,13 +27,7 @@ export default function Introduction() {
         <p>I cannot skateboard. I tried, but it was a whole&nbsp;thing.</p>
       </div>
 
-      <img
-        className="select-none"
-        alt=""
-        width="32"
-        height="32"
-        src={`${EMOJI_URL}🤙?animated=false`}
-      />
+      <HorizontalRule className="max-w-[4rem]" />
 
       <div className="space-y-4 text-sm text-neutral-800 dark:text-neutral-400">
         <p>
