@@ -122,12 +122,6 @@ export const projects = {
       url: 'https://dragitdownonyou.com/',
     },
     {
-      icon: '📹',
-      title: 'Koya',
-      subtitle: 'An immersive webcam-powered musical experience',
-      url: 'https://koya.brailleface.co/',
-    },
-    {
       icon: '🏉',
       title: 'Rugby',
       subtitle: 'A GIF-powered music video',
