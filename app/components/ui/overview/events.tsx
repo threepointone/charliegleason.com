@@ -33,7 +33,7 @@ export default function Events() {
           </Block>
         </div>
         
-        <Block id="awards-achievements" title="Awards &amp; Achievements">
+        <Block wide id="awards-achievements" title="Awards &amp; Achievements">
           <Items>
             <Item added="1674581991506" date="2023" title="Product Hunt, Runner Up in the 2022 Golden Kitty Awards" link={{title: "Pika", href: "https://www.producthunt.com/posts/pika"}} />
             <Item date="2021" title="Product Hunt, Featured" link={{title: "Pika", href: "https://www.producthunt.com/posts/pika"}} />

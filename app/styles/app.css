@@ -569,6 +569,10 @@ video {
   grid-column: span 1 / span 1;
 }
 
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1739,6 +1743,10 @@ html.dark *::selection {
     margin-bottom: calc(0px * var(--tw-space-y-reverse));
   }
 
+  .sm\:whitespace-nowrap {
+    white-space: nowrap;
+  }
+
   .sm\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
@@ -1759,6 +1767,10 @@ html.dark *::selection {
 }
 
 @media (min-width: 768px) {
+  .md\:whitespace-nowrap {
+    white-space: nowrap;
+  }
+
   .md\:pb-36 {
     padding-bottom: 9rem;
   }

@@ -32,7 +32,9 @@ export default function Link({
             focus:text-yellow-600 dark:focus:text-yellow-400 focus:border-current dark:focus:border-current
             active:text-yellow-600 dark:active:text-yellow-400 active:border-current dark:active:border-current
             focus-visible:outline focus-visible:outline-yellow-600 focus-visible:dark:outline-yellow-400
+            truncate
           `}
+          title={children?.toString()}
         >
           {children}
         </a>
@@ -57,9 +59,9 @@ export default function Link({
             active:outline active:outline-yellow-300 dark:active:outline-yellow-800 active:grayscale-0
             focus-visible:outline
 
-            ${!background && 'bg-none bg-white'}
+            ${!background ? 'bg-none bg-white' : ''}
 
-            ${padding === 'large' && 'px-2 py-1'}
+            ${padding === 'large' ? 'px-2 py-1' : ''}
           `}
         >
           {icon && (
