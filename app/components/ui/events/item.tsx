@@ -18,7 +18,7 @@ function Item({ date, title, link, added }: Props) {
   }
 
   const highlight = added
-    ? Math.round((Date.now() - parseInt(added)) / (1000 * 60 * 60 * 24)) <= 14
+    ? Math.round((Date.now() - parseInt(added)) / (1000 * 60 * 60 * 24)) <= 28
     : null
 
   return (
