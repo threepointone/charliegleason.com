@@ -1,11 +1,10 @@
 import type { MetaFunction } from '@remix-run/cloudflare'
-import type { LoaderData } from '~/root'
 import type { DynamicLinksFunction } from 'remix-utils'
 
 import Header from '~/components/ui/header'
 import Overview from '~/components/sections/overview'
 import Work from '~/components/sections/work'
-import Selected from '~/components/sections/selected'
+import Selected from '~/components/sections/selected-redux'
 import Links from '~/components/sections/links'
 import Quotes from '~/components/sections/quotes'
 import Layout from '~/components/ui/layout'
