@@ -1,5 +1,8 @@
-import type { MetaFunction } from '@remix-run/cloudflare'
-import type { LoaderFunction } from '@remix-run/cloudflare'
+import type {
+  MetaFunction,
+  LinksFunction,
+  LoaderFunction,
+} from '@remix-run/cloudflare'
 
 import Header from '~/components/ui/header'
 import NotFound from '~/components/sections/not-found'
@@ -8,6 +11,8 @@ import Links from '~/components/sections/links'
 import Layout from '~/components/ui/layout'
 import Sections from '~/components/ui/sections'
 import Footer from '~/components/sections/footer'
+
+import { EMOJI_URL } from '~/constants'
 
 import { projects, articles, features } from '~/data'
 import tags from '~/utils/tags'
@@ -22,6 +27,16 @@ export const meta: MetaFunction = () => {
     image: 'https://charliegleason.com/social-error.png',
     emoji: '🙈',
   })
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'icon',
+      type: 'image/svg',
+      href: `${EMOJI_URL}${'🙈'}?animated=false`,
+    },
+  ]
 }
 
 export const loader: LoaderFunction = async () => {

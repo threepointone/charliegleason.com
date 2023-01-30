@@ -39,11 +39,6 @@ export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: tailwind },
     { rel: 'stylesheet', href: 'https://use.typekit.net/qjo1mgb.css' },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      href: `${EMOJI_URL}${'🙈'}?animated=false`,
-    },
   ]
 }
 
@@ -86,7 +81,11 @@ export function CatchBoundary() {
         <title>500! Error! Charlie Gleason is having some issues!</title>
         <Meta />
         <Links />
-        <DynamicLinks />
+        <link
+          rel="icon"
+          type="image/svg"
+          href={`${EMOJI_URL}${'🙈'}?animated=false`}
+        />
       </head>
       <body>
         <Error {...caught} />

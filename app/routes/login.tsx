@@ -1,4 +1,8 @@
-import type { LoaderArgs, ActionArgs } from '@remix-run/cloudflare'
+import type {
+  LoaderArgs,
+  ActionArgs,
+  LinksFunction,
+} from '@remix-run/cloudflare'
 
 import { Form, useSearchParams } from '@remix-run/react'
 import { json, redirect } from '@remix-run/cloudflare'
@@ -15,24 +19,38 @@ import Avatar from '~/components/ui/avatar'
 import tags from '~/utils/tags'
 import HorizontalRule from '~/components/ui/hr'
 
+import { EMOJI_URL } from '~/constants'
+
 export const meta: MetaFunction = () => {
   return tags({
     title: 'Login! Charlie Gleason is hiding!',
     description:
       'Designer, developer, creative coder, musician, and login page enthusiast.',
     image: 'https://charliegleason.com/social-error.png',
-    emoji: '🤙',
+    emoji: '🙈',
   })
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'icon',
+      type: 'image/svg',
+      href: `${EMOJI_URL}${'🙈'}?animated=false`,
+    },
+  ]
 }
 
 export async function loader({ request, context }: LoaderArgs) {
   const userId = await getUserId(request, context)
 
+  console.log(request, context)
+
   if (userId) {
     return redirect('/')
   }
 
-  return json(null, { status: 200 })
+  return json({}, { status: 200 })
 }
 
 export async function action({ request, context }: ActionArgs) {
@@ -97,6 +115,7 @@ export default function LoginPage() {
                       type="password"
                       name="password"
                       id="password"
+                      autoComplete="current-password"
                       className="block w-full rounded-none rounded-l-md bg-neutral-100 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 pl-10 focus:border-yellow-500 focus:ring-yellow-500 sm:text-sm"
                       placeholder="Enter password..."
                     />

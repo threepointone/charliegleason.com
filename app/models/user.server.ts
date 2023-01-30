@@ -1,6 +1,9 @@
-export type User = {
-  id: string
-}
+export type User =
+  | {
+      id: string
+    }
+  | null
+  | undefined
 
 export async function getUserById(id: string) {
   if (id === 'guest') {
