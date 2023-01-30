@@ -14,19 +14,15 @@ import Footer from '~/components/sections/footer'
 import tags from '~/utils/tags'
 
 import { projects, articles, features } from '~/data'
-import { useMatches, useRouteLoaderData } from '@remix-run/react'
+import { useMatches } from '@remix-run/react'
 import { EMOJI_URL } from '../constants'
 
-let dynamicLinks: DynamicLinksFunction<LoaderData> = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { symbol }: { symbol?: string } = useRouteLoaderData('root') ?? {
-    symbol: '💀',
-  }
+let dynamicLinks: DynamicLinksFunction = ({ parentsData }) => {
   return [
     {
       rel: 'icon',
       type: 'image/svg',
-      href: `${EMOJI_URL}${symbol}?animated=false`,
+      href: `${EMOJI_URL}${parentsData[0].symbol || '💀'}?animated=false`,
     },
   ]
 }
