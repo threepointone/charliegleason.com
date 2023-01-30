@@ -29,7 +29,7 @@ export default function Quote({
     >
       <p
         className={`-indent-2 text-neutral-800 dark:text-neutral-200 ${
-          hero ? 'text-md' : 'text-sm'
+          hero ? 'text-lg' : 'text-sm'
         }`}
       >
         {children}
