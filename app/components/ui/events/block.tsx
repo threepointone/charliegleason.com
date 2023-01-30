@@ -9,7 +9,6 @@ type Props = {
 }
 
 export default function Block({ id, title, children, wide }: Props) {
-  console.log(wide)
   return (
     <div
       id={id}

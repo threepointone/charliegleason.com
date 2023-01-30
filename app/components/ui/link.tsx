@@ -44,8 +44,8 @@ export default function Link({
       return (
         <a
           href={href}
-          className={`${size === 'large' && 'text-lg sm:text-xl'} 
-            font-display bg-gradient-to-r bg-[length:100%_0.1em] bg-bottom bg-no-repeat rounded-sm box-decoration-clone px-1 outline-2 outline-offset-2 outline-yellow-500 grayscale
+          className={`${size === 'large' ? 'sm:text-md md:text-lg' : ''} 
+            font-display bg-gradient-to-r bg-[length:100%_0.1em] bg-bottom bg-no-repeat rounded-sm box-decoration-clone px-1 -mx-1 outline-2 outline-offset-2 outline-yellow-500 grayscale
             
             bg-neutral-100 from-yellow-500 to-yellow-600 [text-shadow:0_0.125em_0_theme('colors.neutral.100')]
             dark:bg-neutral-900 dark:from-yellow-600 dark:to-yellow-500 dark:[text-shadow:0_0.125em_0_theme('colors.neutral.900')]
@@ -59,9 +59,9 @@ export default function Link({
             active:outline active:outline-yellow-300 dark:active:outline-yellow-800 active:grayscale-0
             focus-visible:outline
 
-            ${!background ? 'bg-none bg-white' : ''}
+            ${!background ? 'bg-none bg-white rounded-md' : ''}
 
-            ${padding === 'large' ? 'px-2 py-1' : ''}
+            ${padding === 'large' ? 'px-2 py-1 -mx-1 -my-0.5' : ''}
           `}
         >
           {icon && (

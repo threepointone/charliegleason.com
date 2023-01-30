@@ -30,7 +30,7 @@ type Note = {
 
 export default function Selected({ sections }: Props) {
   return (
-    <div className="grid grid-cols-1 sm:space-y-0 sm:grid-cols-3 gap-12">
+    <div className="grid grid-cols-1 sm:space-y-0 sm:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-4 md:gap-x-12">
       {sections.map((section) => (
         <div key={section.title} className="space-y-8">
           <Title>Selected {section.title}</Title>
@@ -39,7 +39,7 @@ export default function Selected({ sections }: Props) {
               return (
                 <div key={entry.title} className="flex items-start">
                   <img
-                    className="relative mr-4 rounded-full w-[30px] h-[30px]"
+                    className="relative mr-2 md:mr-4 rounded-full w-[24px] h-[24px] md:w-[30px] md:h-[30px]"
                     src={`${EMOJI_URL}${entry.icon}?detailed=false&animated=false`}
                     alt={`${entry.icon} emoji in a yellow circle`}
                     width="30"
@@ -71,7 +71,7 @@ export default function Selected({ sections }: Props) {
                 return (
                   <div
                     key={note.slug}
-                    className="flex items-center space-x-6 ml-2"
+                    className="flex items-center space-x-4 md:space-x-6 ml-1 md:ml-2"
                   >
                     <svg
                       className="inline-block flex-shrink-0 fill-current text-yellow-400"
