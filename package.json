@@ -6,7 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css && npm run generate:banner",
-    "build": "npm run build:css && remix build",
+    "build": "run-p build:* && remix build",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
     "dev:remix": "remix watch",
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
