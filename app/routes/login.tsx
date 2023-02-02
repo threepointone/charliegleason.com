@@ -18,6 +18,9 @@ import Avatar from '~/components/ui/avatar'
 
 import tags from '~/utils/tags'
 import HorizontalRule from '~/components/ui/hr'
+import Link from '~/components/ui/link'
+
+import { LockClosedIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
 
 import { EMOJI_URL } from '~/constants'
 
@@ -43,8 +46,6 @@ export const links: LinksFunction = () => {
 
 export async function loader({ request, context }: LoaderArgs) {
   const userId = await getUserId(request, context)
-
-  console.log(request, context)
 
   if (userId) {
     return redirect('/')
@@ -85,7 +86,7 @@ export default function LoginPage() {
   return (
     <>
       <div className="grid place-items-center h-full">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-start space-x-4">
           <div className="flex">
             <Avatar symbol={symbol} photo="01" />
           </div>
@@ -98,16 +99,32 @@ export default function LoginPage() {
             </hgroup>
             <div className="space-y-4">
               <h1 className="font-mono text-lg">This is a protected area.</h1>
+              <div className="space-y-4 text-sm text-neutral-600 dark:text-neutral-400">
+                <p>
+                  To abide by Intellectual Property policies, this content is{' '}
+                  <span className="font-semibold">password protected</span>.
+                </p>
+                <p>
+                  <Link href="mailto:hi@charliegleason" type="text">
+                    Contact me
+                  </Link>{' '}
+                  to get access.
+                </p>
+              </div>
               <HorizontalRule />
-              <Form method="post" className="h-full">
+              <Form method="post" className="h-full space-y-2">
                 <label className="sr-only" htmlFor="password">
                   Password
                 </label>
                 <div className="mt-1 flex rounded-md shadow-sm">
                   <div className="relative flex flex-grow items-stretch focus-within:z-10">
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <div
-                        className="h-5 w-5 bg-neutral-400 dark:bg-neutral-800"
+                      <LockClosedIcon
+                        className={`h-4 w-4 transition-color ${
+                          unauthorized
+                            ? 'text-yellow-700 dark:text-yellow-500'
+                            : 'text-neutral-500'
+                        }`}
                         aria-hidden="true"
                       />
                     </div>
@@ -122,15 +139,23 @@ export default function LoginPage() {
                   </div>
                   <input type="hidden" name="redirectTo" value={redirectTo} />
                   <button
-                    type="button"
-                    className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-400 hover:bg-neutral-100  dark:hover:bg-neutral-800 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500"
+                    type="submit"
+                    className="relative -ml-px inline-flex items-center rounded-r-md border border-yellow-500 dark:border-yellow-700 bg-yellow-50 dark:bg-neutral-900 px-4 py-2 text-sm font-medium text-yellow-700 dark:text-yellow-400 hover:bg-yellow-100  dark:hover:bg-yellow-800 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500"
                   >
-                    <div
-                      className="h-5 w-5 bg-neutral-400 dark:bg-neutral-800"
-                      aria-hidden="true"
-                    />
-                    <span>Sort</span>
+                    <span className="sr-only">Submit</span>
+                    <ArrowRightIcon className="h-4 w-4" />
                   </button>
+                </div>
+                <div
+                  className={`text-xxs font-mono ${
+                    unauthorized
+                      ? 'text-yellow-700 dark:text-yellow-500'
+                      : 'text-transparent'
+                  }`}
+                >
+                  {unauthorized
+                    ? 'Beep boop! Incorrect password! Please try again.'
+                    : '...'}
                 </div>
               </Form>
             </div>
