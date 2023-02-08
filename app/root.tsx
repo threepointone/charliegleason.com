@@ -16,6 +16,7 @@ import {
 
 import { DynamicLinks } from 'remix-utils'
 
+import { cssBundleHref } from '@remix-run/css-bundle'
 import tailwind from './styles/app.css'
 import { EMOJI_URL } from './constants'
 import Error from '~/components/sections/error'
@@ -37,6 +38,7 @@ import type { User } from './models/user.server'
 
 export const links: LinksFunction = () => {
   return [
+    ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
     { rel: 'stylesheet', href: tailwind },
     { rel: 'stylesheet', href: 'https://use.typekit.net/qjo1mgb.css' },
   ]
