@@ -9,7 +9,7 @@ export async function loader({ request, context }: LoaderArgs) {
   return json({ userId })
 }
 
-export default function CasePage() {
+export default function ExamplePage() {
   const data = useLoaderData<typeof loader>()
   return (
     <div className="[outline-offset:-100px]">

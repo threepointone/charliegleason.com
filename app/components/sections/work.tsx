@@ -1,30 +1,26 @@
-import Link from '~/components/ui/link'
+import Tile from '~/components/ui/work/tile'
 import Title from '~/components/ui/title'
 
 export default function Work() {
   return (
-    <div id="case-studies" className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-      <div className="lg:col-span-3">
-        <Title>Case Studies</Title>
+    <>
+      <div id="case-studies" className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="lg:col-span-3">
+          <Title>Case Studies</Title>
+        </div>
+        <div className="lg:col-span-1">
+          <Tile href="/work/example" title="Work" />
+        </div>
       </div>
-      <div className="lg:col-span-1">
-        <Link href="/work/case">Work</Link>
+      {/* To remove */}
+      <div className="h-[322px] overflow-hidden">
+        <img
+          src="/assets/placeholders/work.png"
+          width="1542"
+          className="w-[1542px] absolute left-1/2 -translate-x-1/2 max-w-none"
+          alt=""
+        />
       </div>
-      <div className="lg:col-span-1">
-        <Link href="/work/case">Work</Link>
-      </div>
-      <div className="lg:col-span-1">
-        <Link href="/work/case">Work</Link>
-      </div>
-      <div className="lg:col-span-1">
-        <Link href="/work/case">Work</Link>
-      </div>
-      <div className="lg:col-span-1">
-        <Link href="/work/case">Work</Link>
-      </div>
-      <div className="lg:col-span-1">
-        <Link href="/work/case">Work</Link>
-      </div>
-    </div>
+    </>
   )
 }
