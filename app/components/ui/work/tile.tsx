@@ -15,7 +15,7 @@ export const useMousePosition = (ref: any) => {
 
     const setFromEvent = (e: MouseEvent) => {
       if (isTimeToUpdate()) {
-        var rect = (e.target as HTMLAnchorElement).getBoundingClientRect()
+        var rect = (e.target as HTMLDivElement).getBoundingClientRect()
 
         const _x = reference.offsetLeft + Math.floor(reference.offsetWidth / 2)
         const _y = reference.offsetTop + Math.floor(reference.offsetHeight / 2)
@@ -24,13 +24,13 @@ export const useMousePosition = (ref: any) => {
         const y = (e.clientY - rect.top - _y) * -1
 
         setPosition({
-          x: (y * -1) / (reference.offsetHeight / 2),
-          y: (x * -1) / (reference.offsetWidth / 2),
+          x: y / (reference.offsetHeight / 2),
+          y: x / (reference.offsetWidth / 2),
         })
       }
     }
 
-    const setToZero = (e: MouseEvent) => {
+    const setToZero = () => {
       setPosition({ x: 0, y: 0 })
     }
     reference.addEventListener('mousemove', setFromEvent)
@@ -45,7 +45,7 @@ export const useMousePosition = (ref: any) => {
 }
 
 export default function Tile({ title, href }: { title: string; href: string }) {
-  const ref = useRef<HTMLImageElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const position = useMousePosition(ref)
 
   useEffect(() => {
@@ -54,13 +54,18 @@ export default function Tile({ title, href }: { title: string; href: string }) {
   }, [position.x, position.y])
   return (
     <a href={href} className={`block space-y-4 ${css.tile}`}>
-      <div className="relative [perspective:100px]">
-        <img
-          ref={ref}
-          src="https://placehold.co/600x400"
-          className="rounded-lg shadow-lg transition-transform duration-500 ease-out"
-          alt=""
-        />
+      <div className="relative">
+        <div className={css.wrapper} ref={ref}>
+          <div
+            className={`${css.move} shadow-lg rounded-lg overflow-hidden transition-transform duration-500 ease-out pointer-events-none`}
+          >
+            <img
+              src="https://placehold.co/600x400"
+              className="max-w-full w-full"
+              alt=""
+            />
+          </div>
+        </div>
         <img
           src="https://placehold.co/96x96"
           className="rounded-lg shadow-lg absolute bottom-4 -left-4 pointer-events-none"

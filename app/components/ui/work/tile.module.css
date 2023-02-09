@@ -1,6 +1,18 @@
 .tile {
 }
 
-.tile img {
+.wrapper {
+  perspective: 100px;
+}
+
+.move {
   transform: rotateX(var(--x)) rotateY(var(--y));
+}
+
+.move::after {
+  content: '';
+  background: rgba(0, 0, 0, 0.25);
+  display: block;
+  position: absolute;
+  inset: 0;
 }
