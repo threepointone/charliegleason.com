@@ -8,5 +8,7 @@ module.exports = {
   devServerBroadcastDelay: 2000,
   future: {
     unstable_cssModules: true,
+    unstable_tailwind: true,
+    unstable_postcss: true,
   },
 }
