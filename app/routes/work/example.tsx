@@ -1,8 +1,5 @@
 import type { LoaderArgs } from '@remix-run/cloudflare'
-import { json } from '@remix-run/cloudflare'
 import { requireUserId } from '~/session.server'
-import { useLoaderData } from '@remix-run/react'
-import Link from '~/components/ui/link'
 import type { DynamicLinksFunction } from 'remix-utils'
 import { EMOJI_URL } from '~/constants'
 import type { MetaFunction } from '@remix-run/cloudflare'
@@ -32,13 +29,10 @@ export const meta: MetaFunction = () => {
 }
 
 export async function loader({ request, context }: LoaderArgs) {
-  const userId = await requireUserId(request, context)
-  return json({ userId })
+  return await requireUserId(request, context)
 }
 
 export default function ExamplePage() {
-  const data = useLoaderData<typeof loader>()
-
   const { symbol, photo, user } = useMatches().find(
     (route) => route.id === 'root'
   )?.data ?? { symbol: '💀', photo: '01', user: { id: 'unauthenticated' } }
