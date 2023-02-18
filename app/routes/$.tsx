@@ -1,5 +1,8 @@
-import type { MetaFunction } from '@remix-run/cloudflare'
-import type { LoaderFunction } from '@remix-run/cloudflare'
+import type {
+  MetaFunction,
+  LinksFunction,
+  LoaderFunction,
+} from '@remix-run/cloudflare'
 
 import Header from '~/components/ui/header'
 import NotFound from '~/components/sections/not-found'
@@ -9,7 +12,9 @@ import Layout from '~/components/ui/layout'
 import Sections from '~/components/ui/sections'
 import Footer from '~/components/sections/footer'
 
-import { projects } from '~/data'
+import { EMOJI_URL } from '~/constants'
+
+import { projects, articles, features } from '~/data'
 import tags from '~/utils/tags'
 
 import { json } from '@remix-run/cloudflare'
@@ -24,6 +29,16 @@ export const meta: MetaFunction = () => {
   })
 }
 
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'icon',
+      type: 'image/svg',
+      href: `${EMOJI_URL}${'🙈'}?animated=false`,
+    },
+  ]
+}
+
 export const loader: LoaderFunction = async () => {
   return json(null, { status: 404 })
 }
@@ -31,11 +46,11 @@ export const loader: LoaderFunction = async () => {
 export default function NotFoundRoute() {
   return (
     <>
-      <Layout>
+      <Layout wide>
         <Header symbol="🙈" photo="01" small />
         <Sections>
           <NotFound />
-          <Selected sections={[projects]} />
+          <Selected sections={[projects, articles, features]} />
           <Links />
         </Sections>
         <Footer />

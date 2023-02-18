@@ -1,4 +1,6 @@
-import { json, image } from 'remix-utils'
+import { image } from 'remix-utils'
+import { json } from '@remix-run/cloudflare'
+
 import emojiList from '~/utils/emoji-list'
 import sampleSize from 'lodash/sampleSize'
 
@@ -7,7 +9,6 @@ import GraphemeSplitter from 'grapheme-splitter'
 import nodeEmoji from 'node-emoji'
 import { Buffer } from '../../utils/buffer.server'
 import { optimize } from 'svgo'
-import type { OptimizedSvg } from 'svgo'
 
 type EmojiResponse = {
   error?: string
@@ -145,6 +146,7 @@ export async function loader({ params, request }: any) {
   const detailed = url.searchParams.get('detailed') !== 'false'
 
   const emoji = params.emoji
+
   const output = fetchEmoji(emoji)
 
   const result: ResourceResponse = handleResponse(output)!
@@ -193,12 +195,16 @@ export async function loader({ params, request }: any) {
   }
 
   async function fetchImageToBase64(key: string) {
-    const response = await fetch(
-      `${url.protocol}//${url.host}/assets/emoji/${key}.png`
-    )
-    const arrayBuffer = Buffer.from(await response.arrayBuffer())
-    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
-    return base64
+    try {
+      const response = await fetch(
+        `${url.protocol}//${url.host}/assets/emoji/${key}.png`
+      )
+      const arrayBuffer = Buffer.from(await response.arrayBuffer())
+      const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
+      return base64
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const svg = `
@@ -297,7 +303,7 @@ export async function loader({ params, request }: any) {
     </svg>
   `
 
-  const svgbuffer = (await optimize(svg, {
+  const svgbuffer = await optimize(svg, {
     multipass: true,
     plugins: [
       {
@@ -310,7 +316,7 @@ export async function loader({ params, request }: any) {
         },
       },
     ],
-  })) as OptimizedSvg
+  })
 
   return image(Buffer.from(svgbuffer.data), {
     type: 'image/svg+xml',

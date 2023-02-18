@@ -1,6 +1,7 @@
 import Link from '~/components/ui/link'
+import HorizontalRule from '~/components/ui/hr'
 
-const Introduction = () => {
+export default function Introduction() {
   return (
     <div className="space-y-6">
       <div className="space-y-4">
@@ -26,12 +27,7 @@ const Introduction = () => {
         <p>I cannot skateboard. I tried, but it was a whole&nbsp;thing.</p>
       </div>
 
-      <div
-        aria-hidden="true"
-        className="dark:text-neutral-700 text-neutral-300 select-none"
-      >
-        • • •
-      </div>
+      <HorizontalRule className="max-w-[4rem]" />
 
       <div className="space-y-4 text-sm text-neutral-800 dark:text-neutral-400">
         <p>
@@ -65,12 +61,10 @@ const Introduction = () => {
           .
         </p>
         <p>
-          I believe there are very few things that can’t be made easier with
-          good documentation.
+          I believe there are few things more comforting than good
+          documentation.
         </p>
       </div>
     </div>
   )
 }
-
-export default Introduction

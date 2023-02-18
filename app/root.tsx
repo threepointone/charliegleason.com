@@ -16,6 +16,7 @@ import {
 
 import { DynamicLinks } from 'remix-utils'
 
+import { cssBundleHref } from '@remix-run/css-bundle'
 import tailwind from './styles/app.css'
 import { EMOJI_URL } from './constants'
 import Error from '~/components/sections/error'
@@ -32,22 +33,23 @@ import {
   useTheme,
 } from '~/utils/theme-provider'
 
+import { getUser } from './session.server'
+import type { User } from './models/user.server'
+
 export const links: LinksFunction = () => {
   return [
+    ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
     { rel: 'stylesheet', href: tailwind },
     { rel: 'stylesheet', href: 'https://use.typekit.net/qjo1mgb.css' },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      href: `${EMOJI_URL}${'🙈'}?animated=false`,
-    },
   ]
 }
 
 export const meta: MetaFunction = () => {
   return tags({
-    title: 'Charlie Gleason',
-    description: 'Designer, developer, creative coder, and musician.',
+    title:
+      'Charlie Gleason • Designer, developer, creative coder, and musician.',
+    description:
+      'I’m a user interface / user experience lead at Salesforce. Before that I looked after design and front-end development for the London-based crowdfunding publisher Unbound and the Melbourne-based social film site Goodfilms, and was the technical lead of the Clemenger BBDO ad agency. I studied design and computer science, and I like the space between art and code. I also enjoy the blind terror of the creative process, solving difficult problems, and a clean sheet of paper. I cannot skateboard. I tried, but it was a whole thing.',
     image: 'https://charliegleason.com/social-error.png',
   })
 }
@@ -56,15 +58,20 @@ export type LoaderData = {
   theme: Theme | null
   symbol: string
   photo: string
+  user: User
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const themeSession = await getThemeSession(request)
+export const loader: LoaderFunction = async ({ request, context }) => {
+  const themeSession = await getThemeSession(request, context)
 
   const data: LoaderData = {
     theme: themeSession.getTheme(),
     symbol: sampleSize(emojiList, Math.ceil(Math.random() * 3)).join(''),
-    photo: `0${random(1, 4)}`,
+    photo: `${random(1, 10).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    })}`,
+    user: await getUser(request, context),
   }
 
   return data
@@ -78,7 +85,11 @@ export function CatchBoundary() {
         <title>500! Error! Charlie Gleason is having some issues!</title>
         <Meta />
         <Links />
-        <DynamicLinks />
+        <link
+          rel="icon"
+          type="image/svg"
+          href={`${EMOJI_URL}${'🙈'}?animated=false`}
+        />
       </head>
       <body>
         <Error {...caught} />
@@ -104,7 +115,7 @@ function App() {
           <Outlet />
           <ScrollRestoration />
           <Scripts />
-          {process.env.NODE_ENV === 'development' && <LiveReload />}
+          <LiveReload />
         </div>
       </body>
     </html>

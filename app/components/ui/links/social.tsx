@@ -7,12 +7,12 @@ type Props = {
   icon: FunctionComponent
 }
 
-const Social = ({ icon, title, url}: Props) => (
-  <div key={url} className="w-1/2 sm:w-auto">
-    <Link icon={icon} href={url} background={false} padding="large">
-      {title}
-    </Link>
-  </div>
-)
-
-export default Social
+export default function Social({ icon, title, url }: Props) {
+  return (
+    <div key={url} className="w-1/2 sm:w-auto">
+      <Link icon={icon} href={url} background={false} padding="large">
+        {title}
+      </Link>
+    </div>
+  )
+}

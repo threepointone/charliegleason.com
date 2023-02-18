@@ -5,10 +5,12 @@ type Props = {
   children: ReactNode[]
 }
 
-const Sections = ({ children }: Props) => (
-  <div className="space-y-12">
-    {children &&
-      children.map((child, i) => [<HorizontalRule key={i} />, child])}
-  </div>
-)
-export default Sections
+export default function Sections({ children }: Props) {
+  return (
+    <div className="space-y-12">
+      {children.length > 1
+        ? children.map((child, i) => [<HorizontalRule key={i} />, child])
+        : children}
+    </div>
+  )
+}

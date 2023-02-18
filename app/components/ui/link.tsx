@@ -12,7 +12,7 @@ type Props = {
   children: ReactNode
 }
 
-const Link = ({
+export default function Link({
   type = 'default',
   size = 'default',
   padding = 'default',
@@ -20,19 +20,21 @@ const Link = ({
   icon,
   href,
   children,
-}: Props) => {
+}: Props) {
   switch (type) {
     case 'text':
       return (
         <a
           href={href}
           className={`
-            transition-colors outline-2 outline-offset-1 rounded-sm border-b border-current mx-0.5
-            hover:text-neutral-900 dark:hover:text-neutral-100
-            focus:text-neutral-900 dark:focus:text-neutral-100
-            active:text-neutral-900 dark:active:text-neutral-100           
-            focus-visible:outline focus-visible:outline-neutral-400 focus-visible:dark:outline-neutral-600
+            transition-colors outline-2 outline-offset-2 rounded-sm border-b border-neutral-900/25 dark:border-neutral-100/25 mx-0.5
+            hover:text-yellow-600 dark:hover:text-yellow-400 hover:border-current dark:hover:border-current
+            focus:text-yellow-600 dark:focus:text-yellow-400 focus:border-current dark:focus:border-current
+            active:text-yellow-600 dark:active:text-yellow-400 active:border-current dark:active:border-current
+            focus-visible:outline focus-visible:outline-yellow-600 focus-visible:dark:outline-yellow-400
+            truncate
           `}
+          title={children?.toString()}
         >
           {children}
         </a>
@@ -42,10 +44,8 @@ const Link = ({
       return (
         <a
           href={href}
-          className={`${
-            size === 'large' && 'text-lg sm:text-xl'
-          } 
-            font-display bg-gradient-to-r bg-[length:100%_0.1em] bg-bottom bg-no-repeat rounded-sm box-decoration-clone px-1 outline-2 outline-offset-2 outline-yellow-500 grayscale
+          className={`${size === 'large' ? 'sm:text-md md:text-lg' : ''} 
+            font-display bg-gradient-to-r bg-[length:100%_0.1em] bg-bottom bg-no-repeat rounded-sm box-decoration-clone px-1 -mx-1 outline-2 outline-offset-2 outline-yellow-500 grayscale
             
             bg-neutral-100 from-yellow-500 to-yellow-600 [text-shadow:0_0.125em_0_theme('colors.neutral.100')]
             dark:bg-neutral-900 dark:from-yellow-600 dark:to-yellow-500 dark:[text-shadow:0_0.125em_0_theme('colors.neutral.900')]
@@ -59,13 +59,9 @@ const Link = ({
             active:outline active:outline-yellow-300 dark:active:outline-yellow-800 active:grayscale-0
             focus-visible:outline
 
-            ${
-              !background && 'bg-none bg-white'
-            }
+            ${!background ? 'bg-none bg-white rounded-md' : ''}
 
-            ${
-              padding === "large" && 'px-2 py-1'
-            }
+            ${padding === 'large' ? 'px-2 py-1 -mx-1 -my-0.5' : ''}
           `}
         >
           {icon && (
@@ -78,5 +74,3 @@ const Link = ({
       )
   }
 }
-
-export default Link

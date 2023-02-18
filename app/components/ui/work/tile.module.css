@@ -1,0 +1,8 @@
+.wrapper {
+  aspect-ratio: 1.72/1;
+  perspective: 100px;
+}
+
+.move {
+  transform: rotateX(var(--x)) rotateY(var(--y));
+}

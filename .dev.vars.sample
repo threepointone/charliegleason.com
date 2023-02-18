@@ -1,0 +1,2 @@
+SESSION_SECRET=a-long-string-of-numbers-and-letters
+AUTH_PASSWORD=password
