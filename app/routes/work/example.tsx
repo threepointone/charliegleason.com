@@ -23,7 +23,7 @@ export const handle = { dynamicLinks }
 
 export const meta: MetaFunction = () => {
   return tags({
-    title: 'Charlie Gleason',
+    title: 'Charlie Gleason is a work in progress.',
     image: 'https://charliegleason.com/social-default.png',
   })
 }

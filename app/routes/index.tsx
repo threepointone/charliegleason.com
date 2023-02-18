@@ -1,4 +1,3 @@
-import type { MetaFunction } from '@remix-run/cloudflare'
 import type { DynamicLinksFunction } from 'remix-utils'
 
 import Header from '~/components/ui/header'
@@ -10,7 +9,6 @@ import Quotes from '~/components/sections/quotes'
 import Layout from '~/components/ui/layout'
 import Sections from '~/components/ui/sections'
 import Footer from '~/components/sections/footer'
-import tags from '~/utils/tags'
 
 import { projects, articles, features } from '~/data'
 import { useMatches } from '@remix-run/react'
@@ -27,13 +25,6 @@ let dynamicLinks: DynamicLinksFunction = ({ parentsData }) => {
 }
 
 export const handle = { dynamicLinks }
-
-export const meta: MetaFunction = () => {
-  return tags({
-    title: 'Charlie Gleason',
-    image: 'https://charliegleason.com/social-default.png',
-  })
-}
 
 export default function IndexRoute() {
   const { symbol, photo, user } = useMatches().find(
