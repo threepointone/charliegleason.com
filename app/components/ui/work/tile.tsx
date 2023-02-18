@@ -49,14 +49,22 @@ export default function Tile({
   title,
   description,
   href,
+  color,
 }: {
   id: string
   title: string
   description: string
   href: string
+  color: 'yellow' | 'indigo' | 'pink'
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const position = useMousePosition(ref)
+
+  const variantsColors = {
+    yellow: 'from-yellow-500 to-yellow-800 dark:to-yellow-300',
+    pink: 'from-pink-500 to-pink-800 dark:to-pink-300',
+    indigo: 'from-indigo-500 to-indigo-800 dark:to-indigo-300',
+  }
 
   useEffect(() => {
     ref.current?.style.setProperty('--x', `${position.x.toFixed(2)}deg`)
@@ -94,13 +102,19 @@ export default function Tile({
         </div>
         <img
           src={`/assets/work/${id}/icon.png`}
-          className="w-[20%] h-auto rounded-lg shadow-md absolute top-[50%] -left-4 pointer-events-none transform -translate-y-1/2"
+          className="w-[20%] h-auto rounded-lg shadow-xl absolute top-[50%] -left-4 pointer-events-none transform -translate-y-1/2"
           alt=""
         />
       </div>
       <div className="flex gap-4 justify-between items-center">
-        <h2 className="font-display text-xl whitespace-nowrap">{title}</h2>
-        <h2 className="text-xxs">{description}</h2>
+        <h2
+          className={`text-transparent bg-clip-text bg-gradient-to-bl ${variantsColors[color]} font-display text-xl whitespace-nowrap`}
+        >
+          {title}
+        </h2>
+        <h2 className="text-xxs text-neutral-600 dark:text-neutral-400">
+          {description}
+        </h2>
       </div>
     </a>
   )

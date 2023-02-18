@@ -41,6 +41,7 @@ export default function Events() {
             <Item date="2017" title="Typewolf, Site of the Day" link={{title: "Charlie Gleason", href: "https://www.typewolf.com/site-of-the-day/charlie-gleason"}} />
             <Item date="2016" title="The FWA, Site of the Day" link={{title: "Kōya", href: "https://thefwa.com/cases/koya"}} />
             <Item date="2016" title="AWWWARDS, Honourable Mention" link={{title: "Kōya", href: "https://www.awwwards.com/sites/koya"}} />
+            <Item date="2016" title="Kickstarter, Projects We Love" link={{title: "One For Sorrow, Two For Joy", href: "https://www.kickstarter.com/projects/207221174/one-for-sorrow-two-for-joy-an-experiment-in-partic/"}} />
             <Item date="2016" title="The FWA, Site of the Day" link={{title: "Rugby", href: "https://thefwa.com/cases/rugby"}} />
             <Item date="2016" title="AWWWARDS, Honourable Mention" link={{title: "Rugby", href: "https://www.awwwards.com/sites/rugby"}} />
             <Item date="2015" title="The FWA, Site of the Day" link={{title: "I Will Never Let You Go", href: "https://thefwa.com/cases/i-will-never-let-you-go"}} />

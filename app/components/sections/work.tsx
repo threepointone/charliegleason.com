@@ -17,6 +17,7 @@ export default function Work() {
             href="https://wearebrightly.com"
             title="Brightly"
             description="Music and experiments"
+            color="yellow"
           />
         </div>
         <div className="sm:col-span-1">
@@ -25,6 +26,7 @@ export default function Work() {
             href="https://superhighfives.com/pika"
             title="Pika"
             description="An open-source colour macOS app"
+            color="pink"
           />
         </div>
         <div className="sm:col-span-1">
@@ -33,6 +35,7 @@ export default function Work() {
             href="https://heroku.com/pricing"
             title="Heroku Pricing"
             description="Simple pricing for a complex product"
+            color="indigo"
           />
         </div>
       </div>

@@ -3,7 +3,7 @@ import Quote from '~/components/ui/quotes/quote'
 
 export default function Quotes() {
   return (
-    <Grid>
+    <Grid cols={6}>
       <Quote
         hero
         id="margaret"
@@ -12,11 +12,15 @@ export default function Quotes() {
         company="Heroku"
         url="https://www.heroku.com/"
       >
-        “<strong>Charlie is so gifted and productive.</strong> I would work with
-        him again any day. It's been a great professional and personal pleasure
-        to spend these last few years travelling in his company, and seeing the
-        great beauty he's brought to the world through his work on Heroku. May
-        we have the chance to do good things together again&nbsp;someday!”
+        “
+        <strong className="text-neutral-900 dark:text-white">
+          Charlie is so gifted and productive.
+        </strong>{' '}
+        I would work with him again any day. It's been a great professional and
+        personal pleasure to spend these last few years travelling in his
+        company, and seeing the great beauty he's brought to the world through
+        his work on Heroku. May we have the chance to do good things together
+        again&nbsp;someday!”
       </Quote>
 
       <Quote
@@ -29,7 +33,10 @@ export default function Quotes() {
         “Charlie’s nicer friends will say great things about his creativity and
         empathy, which is true, but not interesting. Charlie has hustle. He
         works and he works and he works,{' '}
-        <strong>and that is how he got so good at what he&nbsp;does</strong>.”
+        <strong className="text-neutral-900 dark:text-white">
+          and that is how he got so good at what he&nbsp;does
+        </strong>
+        .”
       </Quote>
 
       <Quote
@@ -39,9 +46,12 @@ export default function Quotes() {
         company="Linc"
         url="https://linc.sh/"
       >
-        “<strong>Charlie has a formidable blend of talents</strong>: a grounded,
-        empathetic design sense, an artist’s eye for subversion, and the
-        tenacity to do whatever—and learn whatever—is necessary to
+        “
+        <strong className="text-neutral-900 dark:text-white">
+          Charlie has a formidable blend of talents
+        </strong>
+        : a grounded, empathetic design sense, an artist’s eye for subversion,
+        and the tenacity to do whatever—and learn whatever—is necessary to
         ship&nbsp;projects.”
       </Quote>
 
@@ -53,8 +63,10 @@ export default function Quotes() {
         url="https://www.squareweave.com.au/"
       >
         “Charlie has a{' '}
-        <strong>unique, articulate, polished understanding of design</strong>,
-        art and how people interact and care for one&nbsp;another.”
+        <strong className="text-neutral-900 dark:text-white">
+          unique, articulate, polished understanding of design
+        </strong>
+        , art and how people interact and care for one&nbsp;another.”
       </Quote>
 
       <Quote
@@ -64,9 +76,12 @@ export default function Quotes() {
         company="Unbound"
         url="https://unbound.com/"
       >
-        “<strong>Charlie is a developer of exceptional talent</strong>. He is
-        personable and fun, and these qualities made him universally loved by
-        the team around&nbsp;him.”
+        “
+        <strong className="text-neutral-900 dark:text-white">
+          Charlie is a developer of exceptional talent
+        </strong>
+        . He is personable and fun, and these qualities made him universally
+        loved by the team around&nbsp;him.”
       </Quote>
     </Grid>
   )
