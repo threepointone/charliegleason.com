@@ -8,7 +8,7 @@ type Props = {
 export default function Grid({ children, cols = 3 }: Props) {
   const variantsCols = {
     3: 'sm:grid-cols-3',
-    6: 'sm:grid-cols-6',
+    6: 'xl:grid-cols-6 lg:grid-cols-3 sm:grid-cols-2',
   }
   return (
     <div
