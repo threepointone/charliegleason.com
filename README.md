@@ -51,6 +51,8 @@ If you don't already have an account, you can [create a Cloudflare account here]
 
 (And just to be sure, the "Build command" should be set to `npm run build`, and the "Build output directory" should be set to `public`.)
 
+You'll also need to set up some environment variables in Cloudflare (handled locally with the `.dev.vars` file). You can learn more about that in the [Cloudflare docs](https://developers.cloudflare.com/workers/platform/environment-variables/#add-secrets-to-your-project).
+
 ## Interesting Bits
 
 Probably the most unique thing about the project is the automagic emoji generator, which is housed in the [`$emoji.tsx`](https://github.com/superhighfives/charliegleason.com/blob/main/app/routes/emoji/%24emoji.tsx) file.
