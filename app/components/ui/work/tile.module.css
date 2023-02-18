@@ -1,18 +1,8 @@
-.tile {
-}
-
 .wrapper {
+  aspect-ratio: 1.72/1;
   perspective: 100px;
 }
 
 .move {
   transform: rotateX(var(--x)) rotateY(var(--y));
-}
-
-.move::after {
-  content: '';
-  background: rgba(0, 0, 0, 0.5);
-  display: block;
-  position: absolute;
-  inset: 0;
 }

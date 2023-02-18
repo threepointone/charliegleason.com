@@ -44,7 +44,17 @@ export const useMousePosition = (ref: any) => {
   return position
 }
 
-export default function Tile({ title, href }: { title: string; href: string }) {
+export default function Tile({
+  id,
+  title,
+  description,
+  href,
+}: {
+  id: string
+  title: string
+  description: string
+  href: string
+}) {
   const ref = useRef<HTMLDivElement>(null)
   const position = useMousePosition(ref)
 
@@ -53,27 +63,44 @@ export default function Tile({ title, href }: { title: string; href: string }) {
     ref.current?.style.setProperty('--y', `${position.y.toFixed(2)}deg`)
   }, [position.x, position.y])
   return (
-    <a href={href} className={`block space-y-4 ${css.tile}`}>
+    <a href={href} className={`group group:focus block space-y-4 outline-none`}>
       <div className="relative">
-        <div className={css.wrapper} ref={ref}>
+        <div
+          className={`${css.wrapper}
+        group-focus:outline-none group-focus:shadow-outline
+        outline-offset-2 outline-4 group-focus:outline-yellow-600 dark:group-focus:outline-yellow-400
+        rounded-md`}
+          ref={ref}
+        >
+          <img
+            src={`/assets/work/${id}/screenshot.png`}
+            className={`absolute inset-0 z-10 left-4 grayscale 
+            group-focus:-left-2 group-focus:grayscale-0
+            group-hover:-left-2 group-hover:grayscale-0
+            transition-all duration-500 ease-out`}
+            alt=""
+          />
           <div
             className={`${css.move} shadow-lg rounded-lg overflow-hidden transition-transform duration-500 ease-out pointer-events-none`}
           >
             <img
-              src="https://placehold.co/600x400"
-              className="max-w-full w-full"
+              src={`/assets/work/${id}/tile.png`}
+              className={`max-w-full w-full grayscale
+              group-hover:grayscale-0 group-focus:grayscale-0
+              transition-all duration-500 ease-out`}
               alt=""
             />
           </div>
         </div>
         <img
-          src="https://placehold.co/96x96"
-          className="rounded-lg shadow-lg absolute bottom-4 -left-4 pointer-events-none"
+          src={`/assets/work/${id}/icon.png`}
+          className="w-[20%] h-auto rounded-lg shadow-md absolute top-[50%] -left-4 pointer-events-none transform -translate-y-1/2"
           alt=""
         />
       </div>
-      <div className="flex">
-        <h2 className="">{title}</h2>
+      <div className="flex gap-4 justify-between items-center">
+        <h2 className="font-display text-xl whitespace-nowrap">{title}</h2>
+        <h2 className="text-xxs">{description}</h2>
       </div>
     </a>
   )
