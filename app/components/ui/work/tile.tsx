@@ -92,7 +92,6 @@ export default function Tile({
   const [viewRef, inView] = useInView({
     threshold: 1,
     root: viewportRef.current,
-    rootMargin: '-100px 0px -100px 0px',
   })
 
   return (
