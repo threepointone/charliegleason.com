@@ -1,4 +1,4 @@
-import type { HtmlMetaDescriptor } from "@remix-run/cloudflare"
+import type { HtmlMetaDescriptor } from '@remix-run/cloudflare'
 
 type Props = {
   title?: string
@@ -26,6 +26,7 @@ function Tags(props: Props) {
 
   if (props.title) {
     tags.title = props.title
+    tags['og:title'] = props.title
   }
 
   if (props.description) {
