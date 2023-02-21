@@ -1,4 +1,6 @@
+import type { RefObject } from 'react'
 import { useRef, useState, useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import css from './tile.module.css'
 
@@ -50,12 +52,14 @@ export default function Tile({
   description,
   href,
   color,
+  viewportRef,
 }: {
   id: string
   title: string
   description: string
   href: string
   color: 'yellow' | 'indigo' | 'pink'
+  viewportRef: RefObject<HTMLDivElement>
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const position = useMousePosition(ref)
@@ -66,15 +70,42 @@ export default function Tile({
     indigo: 'from-indigo-500 to-indigo-800 dark:to-indigo-300',
   }
 
+  function isTouchDevice() {
+    return (
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      // @ts-ignore - TS doesn't know about this property
+      navigator.msMaxTouchPoints > 0
+    )
+  }
+
   useEffect(() => {
     ref.current?.style.setProperty('--x', `${position.x.toFixed(2)}deg`)
     ref.current?.style.setProperty('--y', `${position.y.toFixed(2)}deg`)
+    !isTouchDevice() &&
+      ref.current?.style.setProperty(
+        'perspective',
+        `${ref.current?.getBoundingClientRect().width / 7.5}px`
+      )
   }, [position.x, position.y])
+
+  const [viewRef, inView] = useInView({
+    threshold: 1,
+    root: viewportRef.current,
+    rootMargin: '-100px 0px -100px 0px',
+  })
+
   return (
-    <a href={href} className={`group group:focus block space-y-4 outline-none`}>
+    <a
+      href={href}
+      ref={viewRef}
+      className={`group group:focus block space-y-4 outline-none ${
+        inView && window.innerWidth < 640 ? 'inframe' : ''
+      }`}
+    >
       <div className="relative">
         <div
-          className={`${css.wrapper}
+          className={`aspect-[1.72/1]
         group-focus:outline-none group-focus:shadow-outline
         outline-offset-2 outline-4 group-focus:outline-yellow-600 dark:group-focus:outline-yellow-400
         rounded-md`}
@@ -82,7 +113,8 @@ export default function Tile({
         >
           <img
             src={`/assets/work/${id}/screenshot.png`}
-            className={`absolute inset-0 z-10 left-4 grayscale 
+            className={`absolute inset-0 z-10 left-4 grayscale pointer-events-none
+            group-[.inframe]:-left-2 group-[.inframe]:grayscale-0
             group-focus:-left-2 group-focus:grayscale-0
             group-hover:-left-2 group-hover:grayscale-0
             transition-all duration-500 ease-out`}
@@ -94,7 +126,7 @@ export default function Tile({
             <img
               src={`/assets/work/${id}/tile.png`}
               className={`max-w-full w-full grayscale
-              group-hover:grayscale-0 group-focus:grayscale-0
+              group-hover:grayscale-0 group-focus:grayscale-0 group-[.inframe]:grayscale-0
               transition-all duration-500 ease-out`}
               alt=""
             />

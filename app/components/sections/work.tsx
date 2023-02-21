@@ -1,7 +1,10 @@
 import Tile from '~/components/ui/work/tile'
 import Title from '~/components/ui/title'
+import { useRef } from 'react'
 
 export default function Work() {
+  const viewportRef = useRef<HTMLDivElement>(null)
+
   return (
     <>
       <div
@@ -18,6 +21,7 @@ export default function Work() {
             title="Brightly"
             description="Music and experiments"
             color="yellow"
+            viewportRef={viewportRef}
           />
         </div>
         <div className="sm:col-span-1">
@@ -27,6 +31,7 @@ export default function Work() {
             title="Pika"
             description="An open-source colour macOS app"
             color="pink"
+            viewportRef={viewportRef}
           />
         </div>
         <div className="sm:col-span-1">
@@ -36,6 +41,7 @@ export default function Work() {
             title="Heroku Pricing"
             description="Simple pricing for a complex product"
             color="indigo"
+            viewportRef={viewportRef}
           />
         </div>
       </div>
