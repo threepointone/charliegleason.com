@@ -90,7 +90,7 @@ export default function Tile({
   }, [position.x, position.y])
 
   const [viewRef, inView] = useInView({
-    threshold: 1,
+    threshold: 0.75,
     root: viewportRef.current,
   })
 
@@ -115,7 +115,7 @@ export default function Tile({
             className={`absolute inset-0 z-10 left-4 grayscale pointer-events-none
             group-[.inframe]:-left-2 group-[.inframe]:grayscale-0
             group-focus:-left-2 group-focus:grayscale-0
-            group-hover:-left-2 group-hover:grayscale-0
+            xs:group-hover:-left-2 xs:group-hover:grayscale-0
             transition-all duration-500 ease-out`}
             alt=""
           />
@@ -125,7 +125,9 @@ export default function Tile({
             <img
               src={`/assets/work/${id}/tile.png`}
               className={`max-w-full w-full grayscale
-              group-hover:grayscale-0 group-focus:grayscale-0 group-[.inframe]:grayscale-0
+              xs:group-hover:grayscale-0
+              group-focus:grayscale-0
+              group-[.inframe]:grayscale-0
               transition-all duration-500 ease-out`}
               alt=""
             />
