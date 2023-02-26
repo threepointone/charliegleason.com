@@ -2,6 +2,14 @@ export const articles = {
   title: 'Articles',
   data: [
     {
+      icon: '🔍',
+      property: 'web.dev',
+      title: 'Testing Web Design Color Contrast',
+      subtitle:
+        'An overview of three tools and techniques for testing and verifying accessible color contrast of your design.',
+      url: 'https://web.dev/testing-web-design-color-contrast/',
+    },
+    {
       icon: '🎨',
       property: 'Medium',
       title: 'Introducing Pika',
@@ -23,37 +31,26 @@ export const articles = {
         'How create-react-app, with a couple of modern tools, can make building static sites (with benefits) a breeze',
       url: 'https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319',
     },
-  ],
-  notes: [
     {
-      date: '2017/02/21',
-      slug: 'https://medium.com/superhighfives/announcing-sandpit-a5da86fd49ed',
+      icon: '🏖️',
+      property: 'Medium',
       title: 'Announcing Sandpit',
-      source: 'Medium',
+      subtitle: 'A creative-coding library for the web',
+      url: 'https://medium.com/superhighfives/announcing-sandpit-a5da86fd49ed',
     },
     {
-      date: '2017/02/01',
-      slug: 'https://medium.com/superhighfives/hot-reloading-create-react-app-73297a00dcad',
+      icon: '🌶️',
+      property: 'Medium',
       title: 'Hot Reloading + create-react-app',
-      source: 'Medium',
+      subtitle: 'How to get hot reloading working with create-react-app',
+      url: 'https://medium.com/superhighfives/hot-reloading-create-react-app-73297a00dcad',
     },
     {
-      date: '2015/09/23',
-      slug: 'https://medium.com/superhighfives/making-a-music-video-f60757ceb4cf',
-      title: 'Making An Interactive Music Video With WebGL',
-      source: 'Medium',
-    },
-    {
-      date: '2014/10/15',
-      slug: 'https://medium.com/superhighfives/the-web-audio-api-60ea00011a57',
-      title: 'The Web Audio API',
-      source: 'Medium',
-    },
-    {
-      date: '2014/09/02',
-      slug: 'https://medium.com/superhighfives/deploying-to-github-pages-with-gulp-c06efc527de8',
-      title: 'Deploying To GitHub Pages With Gulp',
-      source: 'Medium',
+      icon: '📼',
+      property: 'Medium',
+      title: 'An Interactive Music Video With WebGL',
+      subtitle: 'Recreating After Effects in the browser',
+      url: 'https://medium.com/superhighfives/making-a-music-video-f60757ceb4cf',
     },
   ],
 }
@@ -61,6 +58,12 @@ export const articles = {
 export const features = {
   title: 'Features',
   data: [
+    {
+      icon: '🗺️',
+      property: 'Dense Discovery',
+      title: 'Worthy Five: Charlie Gleason',
+      url: 'https://www.densediscovery.com/issues/128',
+    },
     {
       icon: '💪',
       property: 'Uses This',
@@ -85,6 +88,12 @@ export const features = {
       title: 'The New Definition of Front-End Development',
       url: 'https://www.heroku.com/podcasts/codeish/85-the-new-definition-of-frontend-development',
     },
+    {
+      icon: '📔',
+      property: 'Offscreen',
+      title: 'Issue Six: An Open Letter To The Web',
+      url: 'https://www.brizk.com/offscreen-archive/issue6/',
+    },
   ],
 }
 
@@ -99,6 +108,13 @@ export const projects = {
       url: 'https://superhighfives.com/pika',
     },
     {
+      icon: '🦉',
+      title: 'Tweetflight',
+      property: 'Music Video',
+      subtitle: 'A Twitter-powered music video',
+      url: 'http://tweetflight.wearebrightly.com/',
+    },
+    {
       icon: '✨',
       title: 'Releasecast',
       property: 'CLI',
@@ -111,13 +127,6 @@ export const projects = {
       property: 'Library',
       subtitle: 'An open-source creative-coding library',
       url: 'https://sandpitjs.com/',
-    },
-    {
-      icon: '🦉',
-      title: 'Tweetflight',
-      property: 'Music Video',
-      subtitle: 'A Twitter-powered music video',
-      url: 'http://tweetflight.wearebrightly.com/',
     },
     {
       icon: '🎤',
