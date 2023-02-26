@@ -6,7 +6,11 @@ type Props = {
   small?: boolean
 }
 
-export default function Avatar({ symbol = '🙈', photo = false, small = false }: Props) {
+export default function Avatar({
+  symbol = '🙈',
+  photo = false,
+  small = false,
+}: Props) {
   return (
     <>
       <a
