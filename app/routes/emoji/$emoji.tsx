@@ -244,7 +244,7 @@ export async function loader({ params, request }: any) {
                 width="${detailed ? '80' : '100'}"
                 height="${detailed ? '80' : '100'}"
                 href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
-                  emoji.key
+                  emoji!.key
                 )}"
               />
             `
@@ -266,7 +266,7 @@ export async function loader({ params, request }: any) {
               width="${detailed ? '90' : '100'}"
               height="${detailed ? '90' : '100'}"
               href="data:image/png;charset=utf-8;base64,${await fetchImageToBase64(
-                emoji.key
+                emoji!.key
               )}"
               mask="url(#slice-${i})"
               />
