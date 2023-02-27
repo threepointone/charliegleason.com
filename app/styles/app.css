@@ -35,6 +35,10 @@ body {
   padding: 2rem;
 }
 
+:-moz-loading {
+  visibility: hidden;
+}
+
 body::before,
 body::after,
 #__root::before,

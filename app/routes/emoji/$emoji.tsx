@@ -140,7 +140,7 @@ function generateStyles({ numImages, isAnimated = true }: GenerateStyles) {
   `
 }
 
-export async function loader({ params, request }: any) {
+async function generateImage({ params, request }: any): Promise<any> {
   const url = new URL(request.url)
   const animated = url.searchParams.get('animated') !== 'false'
   const detailed = url.searchParams.get('detailed') !== 'false'
@@ -208,16 +208,10 @@ export async function loader({ params, request }: any) {
   }
 
   const svg = `
-    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       ${generateStyles({
         numImages: supporting.length,
         isAnimated: animated,
       })}
-      
-
-      <circle cx="50%" cy="50%" r="${
-        detailed ? '50%' : '45%'
-      }" fill="#fbe047" />
 
       ${
         detailed
@@ -303,22 +297,28 @@ export async function loader({ params, request }: any) {
     </svg>
   `
 
-  const svgbuffer = await optimize(svg, {
-    multipass: true,
-    plugins: [
-      {
-        name: 'preset-default',
-        params: {
-          overrides: {
-            removeHiddenElems: false,
-            minifyStyles: false,
-          },
-        },
-      },
-    ],
-  })
+  return svg
+}
 
-  return image(Buffer.from(svgbuffer.data), {
+export async function loader({ params, request }: any) {
+  const url = new URL(request.url)
+  const detailed = url.searchParams.get('detailed') !== 'false'
+
+  const pre = `
+<svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50%" cy="50%" r="${detailed ? '50%' : '45%'}" fill="#fbe047" />`
+
+  let { readable, writable } = new TransformStream()
+  const writer = writable.getWriter()
+  const encoder = new TextEncoder()
+  writer.write(encoder.encode(pre))
+  writer.write(new Uint8Array(4096).fill(32))
+  ;(async () => {
+    const image = await generateImage({ params, request })
+    writer.write(encoder.encode(image))
+    writer.close()
+  })()
+  return image(readable, {
     type: 'image/svg+xml',
   })
 }
