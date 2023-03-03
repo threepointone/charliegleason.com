@@ -6,7 +6,6 @@ type Props = {
   name: string
   company: string
   role: string
-  url: string
   hero?: boolean
   children: ReactNode
 }
@@ -16,7 +15,6 @@ export default function Quote({
   name,
   role,
   company,
-  url,
   hero = false,
   children,
 }: Props) {
@@ -24,30 +22,31 @@ export default function Quote({
     <blockquote
       key={name}
       className={`flex flex-col justify-between ${
-        hero ? 'sm:col-span-2' : 'col-span-1'
+        hero ? 'md:col-span-3 lg:col-span-2 sm:col-span-2' : 'col-span-1'
       }`}
     >
       <p
-        className={`-indent-2 text-neutral-800 dark:text-neutral-300 ${
+        className={`pb-3 -indent-2 border-l border-neutral-200 dark:border-neutral-800 pl-6 flex-1 ml-4 text-neutral-800 dark:text-neutral-300 ${
           hero ? 'text-lg' : 'text-sm'
         }`}
       >
         {children}
       </p>
-      <cite className="not-italic uppercase tracking-wider mt-3 flex items-center">
+      <cite className="not-italic flex items-start">
         <img
-          className="rounded-full mr-2 w-8 h-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white"
+          className="rounded-full mr-2 -mt-1 w-8 h-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white"
           src={`/assets/avatars/avatar-${id}.jpg`}
           alt={`Black and white headshot of ${name}`}
           width="30"
           height="30"
         />
-        <div>
-          <div className="text-neutral-700 dark:text-neutral-400 font-semibold text-xs">
+        <div className="space-y-1">
+          <div className="text-neutral-800 dark:text-neutral-300 font-semibold text-sm">
             {name}
           </div>
-          <div className="text-neutral-600 dark:text-neutral-500 text-xxs">
-            {role}, <Link href={url}>{company}</Link>
+          <div className="text-neutral-700 dark:text-neutral-400 text-xs">
+            <div className="font-semibold">{role}</div>
+            <div>{company}</div>
           </div>
         </div>
       </cite>
