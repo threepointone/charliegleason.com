@@ -12,7 +12,7 @@ export default function Quotes() {
         company="Heroku / Salesforce"
       >
         <span className="opacity-40">“</span>
-        <strong className="text-neutral-900 dark:text-yellow-500">
+        <strong className="text-yellow-700 dark:text-yellow-500">
           Charlie is so gifted and productive.
         </strong>{' '}
         I would work with him again any day. It's been a great professional and
@@ -29,7 +29,7 @@ export default function Quotes() {
         company="Salesforce"
       >
         <span className="opacity-40">“</span>
-        <strong className="text-neutral-900 dark:text-yellow-500">
+        <strong className="text-yellow-700 dark:text-yellow-500">
           Charlie is one of the most gifted, multi-skilled designers I have ever
           worked with.
         </strong>{' '}
@@ -46,7 +46,7 @@ export default function Quotes() {
         <span className="opacity-40">“</span>What impressed me the most was his
         attention to every detail, his professionalism, his leadership in this
         space, and also his empathy and kindness.{' '}
-        <strong className="text-neutral-900 dark:text-yellow-500">
+        <strong className="text-yellow-700 dark:text-yellow-500">
           Oh did I mention he is one fantastic designer?
         </strong>
         <span className="opacity-40">”</span>
@@ -56,7 +56,7 @@ export default function Quotes() {
         <span className="opacity-40">“</span>Charlie’s nicer friends will say
         great things about his creativity and empathy, which is true, but not
         interesting. Charlie has hustle.{' '}
-        <strong className="text-neutral-900 dark:text-yellow-500">
+        <strong className="text-yellow-700 dark:text-yellow-500">
           He works and he works and he works, and that is how he got so good at
           what he&nbsp;does
         </strong>
@@ -70,7 +70,7 @@ export default function Quotes() {
         company="Linc"
       >
         <span className="opacity-40">“</span>
-        <strong className="text-neutral-900 dark:text-yellow-500">
+        <strong className="text-yellow-700 dark:text-yellow-500">
           Charlie has a formidable blend of talents
         </strong>
         : a grounded, empathetic design sense, an artist’s eye for subversion,
@@ -85,7 +85,7 @@ export default function Quotes() {
         company="Squareweave"
       >
         <span className="opacity-40">“</span>Charlie has a{' '}
-        <strong className="text-neutral-900 dark:text-yellow-500">
+        <strong className="text-yellow-700 dark:text-yellow-500">
           unique, articulate, polished understanding of design
         </strong>
         , art and how people interact and care for one&nbsp;another.
@@ -99,7 +99,7 @@ export default function Quotes() {
         company="Unbound"
       >
         <span className="opacity-40">“</span>
-        <strong className="text-neutral-900 dark:text-yellow-500">
+        <strong className="text-yellow-700 dark:text-yellow-500">
           Charlie is a developer of exceptional talent
         </strong>
         . He is personable and fun, and these qualities made him universally
