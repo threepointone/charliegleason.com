@@ -35,6 +35,7 @@ export default function Events() {
         
         <Block wide id="awards-achievements" title="Awards &amp; Achievements">
           <Items>
+            <Item added="1679399492577" date="2023" title="Salesforce TMP AI Hackathon, Winner for Overall Best Hack" />
             <Item added="1674581991506" date="2023" title="Product Hunt, Runner Up in the 2022 Golden Kitty Awards" link={{title: "Pika", href: "https://www.producthunt.com/posts/pika"}} />
             <Item date="2021" title="Product Hunt, Featured" link={{title: "Pika", href: "https://www.producthunt.com/posts/pika"}} />
             <Item date="2019" title="The Ink Award" link={{title: "Heroku Hanafuda Cards", href: "https://suminagame.com/2019/11/27/choboku-037/"}} />

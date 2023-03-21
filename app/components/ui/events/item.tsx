@@ -21,7 +21,7 @@ export default function Item({ date, title, link, stack, added }: Props) {
   }
 
   const highlight = added
-    ? Math.round((Date.now() - parseInt(added)) / (1000 * 60 * 60 * 24)) <= 14
+    ? Math.round((Date.now() - parseInt(added)) / (1000 * 60 * 60 * 24)) <= 90
     : null
 
   return (
