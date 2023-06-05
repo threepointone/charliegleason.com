@@ -76,6 +76,7 @@ export default function Events() {
           <Block id="triathlons" title="Triathlons">
             <Items>
               <Item date="2022" title="Blenheim Palace Triathlon (Sprint)" />
+              <Item date="2023" title="Blenheim Palace Triathlon (Sprint)" />
             </Items>
           </Block>
             
