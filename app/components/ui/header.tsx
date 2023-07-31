@@ -1,5 +1,7 @@
 import Toggle from './toggle'
 import Avatar from './avatar'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { useState } from 'react'
 
 type Props = {
   symbol: string
@@ -7,10 +9,28 @@ type Props = {
   small?: boolean
 }
 
+function Scene() {
+  const [time, setTime] = useState(0)
+
+  useFrame((_state, delta) => {
+    setTime(time + delta)
+  })
+  return (
+    <>
+      <ambientLight intensity={0.1} />
+      <pointLight position={[0, 0, 5]} intensity={5} />
+      <mesh scale={2} rotation={[time, time, time]} position={[0, 0, 1]}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={'yellow'} />
+      </mesh>
+    </>
+  )
+}
+
 export default function Header(props: Props) {
   return (
     <div
-      className={`space-y-4 ${!props.small && 'pt-24 sm:pt-48'} ${
+      className={`relative space-y-4 ${!props.small && 'pt-24 sm:pt-48'} ${
         props.small && '-mt-[3.5rem] sm:-mt-[5rem]'
       }`}
     >
@@ -18,6 +38,13 @@ export default function Header(props: Props) {
         <Toggle />
         <Avatar {...props} />
       </div>
+
+      <div className="w-72 h-72 absolute top-0 right-0">
+        <Canvas>
+          <Scene />
+        </Canvas>
+      </div>
+
       <hgroup className="font-display uppercase tracking-wider text-xs">
         <a
           href="/"
