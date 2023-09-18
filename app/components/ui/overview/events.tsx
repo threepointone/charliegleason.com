@@ -25,7 +25,7 @@ export default function Events() {
             <Items>
               <Item date="2023" title="Dreamforce: Designing a 5 Star Partner Listing" />
               <Item date="2019" title="Creative Coding London" />
-              <Item date="2017" title="Master of Ceremonies: JSConf Budapest" />
+              <Item date="2017" title="JSConf Budapest (Master of Ceremonies)" />
               <Item date="2016" title="Decompress: Blending WebGL and video" />
               <Item date="2012" title="Web Directions South: You are a developer, the internet is your friend" />
               <Item date="2012" title="What Do You Know: So, you are great (and so is Less CSS)" />
