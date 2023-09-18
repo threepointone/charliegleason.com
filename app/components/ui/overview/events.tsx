@@ -23,6 +23,7 @@ export default function Events() {
 
           <Block id="talks-demos-workshops" title="Talks, Demos &amp; Workshops">
             <Items>
+              <Item date="2023" title="Dreamforce: Designing a 5 Star Partner Listing" />
               <Item date="2019" title="Creative Coding London" />
               <Item date="2017" title="Master of Ceremonies: JSConf Budapest" />
               <Item date="2016" title="Decompress: Blending WebGL and video" />
