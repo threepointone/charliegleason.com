@@ -67,7 +67,7 @@ export default function Quotes() {
         id="glen"
         name="Glen Maddern"
         role="Systems Engineer"
-        company="Linc"
+        company="Cloudflare"
       >
         <span className="opacity-40">“</span>
         <strong className="text-yellow-700 dark:text-yellow-500">
