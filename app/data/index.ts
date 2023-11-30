@@ -101,7 +101,7 @@ export const projects = {
   title: 'Projects',
   data: [
     {
-      icon: '🖼️',
+      icon: '🌊',
       title: 'Lysterfield Lake',
       property: 'Music Video',
       subtitle: 'An interactive AI-generated 3D fever dream',
@@ -122,7 +122,7 @@ export const projects = {
       url: 'http://tweetflight.wearebrightly.com/',
     },
     {
-      icon: '✨',
+      icon: '🪄',
       title: 'Releasecast',
       property: 'CLI',
       subtitle: 'Tooling to help you get from .app to release',
