@@ -101,6 +101,13 @@ export const projects = {
   title: 'Projects',
   data: [
     {
+      icon: '🖼️',
+      title: 'Lysterfield Lake',
+      property: 'Music Video',
+      subtitle: 'An interactive AI-generated 3D fever dream',
+      url: 'https://lysterfieldlake.com',
+    },
+    {
       icon: '🎨',
       title: 'Pika',
       property: 'macOS',
