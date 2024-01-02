@@ -36,6 +36,7 @@ export default function Events() {
         
         <Block wide id="awards-achievements" title="Awards &amp; Achievements">
           <Items>
+            <Item added="1704231952628" date="2024" title="AWWWARDS, Nomination for Typography Honors" link={{title: "Lysterfield Lake", href: "https://www.awwwards.com/sites/lysterfield-lake"}} />
             <Item added="1703075047170" date="2023" title="AWWWARDS, Honourable Mention" link={{title: "Lysterfield Lake", href: "https://www.awwwards.com/sites/lysterfield-lake"}} />
             <Item added="1679399492577" date="2023" title="Salesforce TMP AI Hackathon, Winner for Overall Best Hack" />
             <Item added="1674581991506" date="2023" title="Product Hunt, Runner Up in the 2022 Golden Kitty Awards" link={{title: "Pika", href: "https://www.producthunt.com/posts/pika"}} />
