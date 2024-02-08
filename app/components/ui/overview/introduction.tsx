@@ -6,14 +6,15 @@ export default function Introduction() {
     <div className="space-y-6">
       <div className="space-y-4">
         <h1 className="text-xl">
-          I’m a user interface / user experience lead at{' '}
+          I’m a lead product designer at{' '}
           <Link href="https://salesforce.com">Salesforce</Link>.
         </h1>
 
         <p>
-          Before that I looked after design and front-end development for the
-          London-based crowdfunding publisher{' '}
-          <Link href="http://unbound.com/">Unbound</Link> and the
+          Before that I looked after design and brand at{' '}
+          <Link href="https://heroku.com">Heroku</Link> , design and front-end
+          development for London-based crowdfunding publisher{' '}
+          <Link href="http://unbound.com/">Unbound</Link> , co-founded the
           Melbourne-based social film site Goodfilms, and was the technical lead
           of the{' '}
           <Link href="https://www.clemengerbbdo.com.au">Clemenger BBDO</Link>{' '}
