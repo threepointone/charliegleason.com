@@ -12,9 +12,9 @@ export default function Introduction() {
 
         <p>
           Before that I looked after design and brand at{' '}
-          <Link href="https://heroku.com">Heroku</Link> , design and front-end
-          development for London-based crowdfunding publisher{' '}
-          <Link href="http://unbound.com/">Unbound</Link> , co-founded the
+          <Link href="https://heroku.com">Heroku</Link>&nbsp;, design and
+          front-end development for London-based crowdfunding publisher{' '}
+          <Link href="http://unbound.com/">Unbound</Link>&nbsp;, co-founded the
           Melbourne-based social film site Goodfilms, and was the technical lead
           of the{' '}
           <Link href="https://www.clemengerbbdo.com.au">Clemenger BBDO</Link>{' '}
