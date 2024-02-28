@@ -11,7 +11,8 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-  useCatch,
+  useRouteError,
+  isRouteErrorResponse,
 } from '@remix-run/react'
 
 import { DynamicLinks } from 'remix-utils'
@@ -77,12 +78,24 @@ export const loader: LoaderFunction = async ({ request, context }) => {
   return data
 }
 
-export function CatchBoundary() {
-  const caught = useCatch()
+export function ErrorBoundary() {
+  const error = useRouteError()
+
+  const caught = {}
+  caught.status = 500
+  caught.statusText = 'An unknown error has occured'
+
+  if (isRouteErrorResponse(error)) {
+    caught.status = error.status
+    caught.statusText = error.data.message
+  }
+
   return (
     <html className="dark grayscale">
       <head>
-        <title>500! Error! Charlie Gleason is having some issues!</title>
+        <title>
+          {caught.status}! Error! Charlie Gleason is having some issues!
+        </title>
         <Meta />
         <Links />
         <link
@@ -108,7 +121,7 @@ function App() {
         <ThemeProviderSetup ssrTheme={Boolean(data.theme)} />
         <Meta />
         <Links />
-        <DynamicLinks />
+        <Dynami cLinks />
       </head>
       <body>
         <div id="__root">

@@ -1,8 +1,9 @@
 node_modules
 
 /.cache
-/functions/\[\[path\]\].*
-/functions/_assets
+/functions
+/.wrangler
+/.partykit
 /public/build
 .env
 .dev.vars

@@ -11,12 +11,13 @@ module.exports = {
   serverMinify: true,
   serverModuleFormat: 'esm',
   serverPlatform: 'neutral',
-  serverBuildTarget: 'cloudflare-pages',
-  devServerBroadcastDelay: 2000,
+  tailwind: true,
+  postcss: true,
+  serverNodeBuiltinsPolyfill: {
+    modules: {},
+  },
   future: {
     v2_dev: true,
-    unstable_cssModules: true,
-    unstable_tailwind: true,
-    unstable_postcss: true,
+    v2_errorBoundary: true,
   },
 }
