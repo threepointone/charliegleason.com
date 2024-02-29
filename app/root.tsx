@@ -15,8 +15,6 @@ import {
   isRouteErrorResponse,
 } from '@remix-run/react'
 
-import { DynamicLinks } from 'remix-utils'
-
 import { cssBundleHref } from '@remix-run/css-bundle'
 import tailwind from './styles/app.css'
 import { EMOJI_URL } from './constants'
@@ -121,7 +119,6 @@ function App() {
         <ThemeProviderSetup ssrTheme={Boolean(data.theme)} />
         <Meta />
         <Links />
-        <DynamicLinks />
       </head>
       <body>
         <div id="__root">

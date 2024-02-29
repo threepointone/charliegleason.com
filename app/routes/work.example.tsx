@@ -1,6 +1,5 @@
 import type { LoaderArgs } from '@remix-run/cloudflare'
 import { requireUserId } from '~/session.server'
-import type { DynamicLinksFunction } from 'remix-utils'
 import { EMOJI_URL } from '~/constants'
 import type { MetaFunction } from '@remix-run/cloudflare'
 import tags from '~/utils/tags'
@@ -9,22 +8,15 @@ import Layout from '~/components/ui/layout'
 import Header from '~/components/ui/header'
 import Footer from '~/components/sections/footer'
 
-let dynamicLinks: DynamicLinksFunction = ({ parentsData }) => {
-  return [
-    {
-      rel: 'icon',
-      type: 'image/svg',
-      href: `${EMOJI_URL}${parentsData[0].symbol || '💀'}?animated=false`,
-    },
-  ]
-}
-
-export const handle = { dynamicLinks }
-
-export const meta: MetaFunction = () => {
-  return tags({
+export const meta: MetaFunction<typeof loader> = ({ parentsData }) => {
+  const metatags = tags({
     title: 'Charlie Gleason is a work in progress.',
     image: 'https://charliegleason.com/social-default.png',
+  })
+  metatags.push({
+    rel: 'icon',
+    type: 'image/svg',
+    href: `${EMOJI_URL}${parentsData[0].symbol || '💀'}?animated=false`,
   })
 }
 

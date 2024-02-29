@@ -1,5 +1,3 @@
-import type { DynamicLinksFunction } from 'remix-utils'
-
 import Header from '~/components/ui/header'
 import Overview from '~/components/sections/overview'
 import Work from '~/components/sections/work'
@@ -14,17 +12,19 @@ import { projects, articles, features } from '~/data'
 import { useMatches } from '@remix-run/react'
 import { EMOJI_URL } from '../constants'
 
-let dynamicLinks: DynamicLinksFunction = ({ parentsData }) => {
+export const meta: MetaFunction<typeof loader> = ({ matches }) => {
+  const parentsData = matches[0].data
+  const parentsMeta = matches[0].meta
+
   return [
+    ...parentsMeta,
     {
       rel: 'icon',
       type: 'image/svg',
-      href: `${EMOJI_URL}${parentsData[0].symbol || '💀'}?animated=false`,
+      href: `${EMOJI_URL}${parentsData.symbol || '💀'}?animated=false`,
     },
   ]
 }
-
-export const handle = { dynamicLinks }
 
 export default function IndexRoute() {
   const { symbol, photo, user } = useMatches().find(

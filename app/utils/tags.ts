@@ -43,7 +43,7 @@ function Tags(props: Props) {
     return { [tag]: tags[tag] }
   })
 
-  return metatags as HtmlMetaDescriptor
+  return metatags
 }
 
 export default Tags
