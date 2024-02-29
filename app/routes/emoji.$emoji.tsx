@@ -7,8 +7,7 @@ import sampleSize from 'lodash/sampleSize'
 import EmojiRegex from 'emoji-regex'
 import GraphemeSplitter from 'grapheme-splitter'
 import nodeEmoji from 'node-emoji'
-import { Buffer } from '../../utils/buffer.server'
-import { optimize } from 'svgo'
+import { Buffer } from '~/utils/buffer.server'
 
 type EmojiResponse = {
   error?: string

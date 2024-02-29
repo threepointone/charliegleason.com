@@ -121,7 +121,7 @@ function App() {
         <ThemeProviderSetup ssrTheme={Boolean(data.theme)} />
         <Meta />
         <Links />
-        <Dynami cLinks />
+        <DynamicLinks />
       </head>
       <body>
         <div id="__root">
