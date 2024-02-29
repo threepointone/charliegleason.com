@@ -19,6 +19,7 @@ export const meta: MetaFunction<typeof loader> = ({ matches }) => {
   return [
     ...parentsMeta,
     {
+      tagName: 'link',
       rel: 'icon',
       type: 'image/svg',
       href: `${EMOJI_URL}${parentsData.symbol || '💀'}?animated=false`,

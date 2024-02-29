@@ -8,16 +8,23 @@ import Layout from '~/components/ui/layout'
 import Header from '~/components/ui/header'
 import Footer from '~/components/sections/footer'
 
-export const meta: MetaFunction<typeof loader> = ({ parentsData }) => {
+export const meta: MetaFunction<typeof loader> = ({ matches }) => {
+  const parentsData = matches[0].data
+
   const metatags = tags({
     title: 'Charlie Gleason is a work in progress.',
     image: 'https://charliegleason.com/social-default.png',
   })
-  metatags.push({
-    rel: 'icon',
-    type: 'image/svg',
-    href: `${EMOJI_URL}${parentsData[0].symbol || '💀'}?animated=false`,
-  })
+
+  return [
+    ...metatags,
+    {
+      tagName: 'link',
+      rel: 'icon',
+      type: 'image/svg',
+      href: `${EMOJI_URL}${parentsData.symbol || '💀'}?animated=false`,
+    },
+  ]
 }
 
 export async function loader({ request, context }: LoaderArgs) {
