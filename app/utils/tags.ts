@@ -39,7 +39,11 @@ function Tags(props: Props) {
     tags['og:image'] = props.image
   }
 
-  return tags as HtmlMetaDescriptor
+  const metatags = Object.keys(tags).map((tag) => {
+    return { [tag]: tags[tag] }
+  })
+
+  return metatags as HtmlMetaDescriptor
 }
 
 export default Tags

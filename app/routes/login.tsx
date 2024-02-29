@@ -112,7 +112,7 @@ export default function LoginPage() {
                 </p>
               </div>
               <HorizontalRule />
-              <Form method="post" className="h-full space-y-2">
+              <Form method="POST" className="h-full space-y-2">
                 <label className="sr-only" htmlFor="password">
                   Password
                 </label>
