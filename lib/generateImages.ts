@@ -1,7 +1,6 @@
 import type { Glyph } from 'fontkit'
 import type { Canvas } from 'canvas'
 
-import fs from 'fs'
 import fontkit from 'fontkit'
 import nodeEmoji from 'node-emoji'
 import requiredEmoji from '../app/utils/emoji-list'
@@ -12,20 +11,20 @@ import sharp from 'sharp'
 const font = fontkit.openSync(
   '/System/Library/Fonts/Apple Color Emoji.ttc',
   'AppleColorEmoji'
-)
+) as any
 
 interface ExtendedGlyph extends Glyph {
-  getImageForSize: (size: number) => {}
-  data: any
+  getImageForSize: (size: number) => { data: Buffer }
+  data: Buffer
 }
 
 if (font) {
   const canvasSize = 160
   const imagePadding = 0
 
-  const allEmoji: { [key: string]: string } = Object.fromEntries(
+  const allEmoji: any = Object.fromEntries(
     Object.entries(nodeEmoji.emoji).filter(([key, emoji]) =>
-      requiredEmoji.includes(emoji)
+      requiredEmoji.includes(emoji as any)
     )
   )
 
@@ -37,6 +36,7 @@ if (font) {
     const canvas = createCanvas(canvasSize, canvasSize)
     const ctx = canvas.getContext('2d')
 
+    console.log(font.layout)
     const run = font.layout(emoji)
     const glyph = (run.glyphs[0] as ExtendedGlyph).getImageForSize(
       canvasSize
@@ -89,7 +89,7 @@ if (font) {
         emojiImg.src = glyph.data
       }).then(async (canvas: Canvas) => {
         console.log(`✅ Generated ${id}: ${emoji}`)
-        var buffer = canvas.toBuffer()
+        const buffer = canvas.toBuffer()
         const image = await sharp(buffer).png({ quality: 75 })
         await image.toFile(`public/assets/emoji/${id}.png`)
       })
