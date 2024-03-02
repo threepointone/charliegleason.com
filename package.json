@@ -8,7 +8,8 @@
     "dev": "remix dev --manual -c \"npm run start\"",
     "build": "remix build",
     "start": "partykit dev",
-    "generate:images": "ts-node lib/generateImages.ts"
+    "deploy": "npm run build && partykit deploy",
+    "generate": "ts-node lib/generateImages.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",

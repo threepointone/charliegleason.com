@@ -26,7 +26,7 @@ $ mv .dev.vars.sample .dev.vars
 Also, if you make any changes to the article emojis, or add new ones to the [`emoji-list.ts`](https://github.com/superhighfives/charliegleason.com/blob/main/app/utils/emoji-list.ts) file, you'll need to re-generate images:
 
 ```sh
-$ npm run generate:images
+$ npm run generate
 ```
 
 You may also need to install the [dependencies for canvas](https://github.com/Automattic/node-canvas#installation) with homebrew:
