@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useContext, createContext, useRef } from 'react'
+import { useState, useEffect, useContext, createContext } from 'react'
 import usePartySocket from 'partysocket/react'
 
 type Position = {

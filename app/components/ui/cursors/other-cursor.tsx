@@ -39,8 +39,6 @@ export default function OtherCursor(props: {
 
   const pointer = cursor.pointer ?? 'mouse'
 
-  const lastUpdate = new Date(cursor.lastUpdate).toLocaleTimeString()
-
   return (
     <div className="fixed" style={{ left: left, top: top }}>
       {pointer === 'touch' ? (

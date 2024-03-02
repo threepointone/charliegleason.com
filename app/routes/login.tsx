@@ -2,17 +2,15 @@ import type {
   LoaderArgs,
   ActionArgs,
   LinksFunction,
+  MetaFunction,
 } from '@remix-run/cloudflare'
 
 import { Form, useSearchParams } from '@remix-run/react'
 import { json, redirect } from '@remix-run/cloudflare'
 
-import { getUserId } from '~/session.server'
-import { createUserSession } from '~/session.server'
+import { getUserId, createUserSession } from '~/session.server'
 
 import { safeRedirect } from '~/utils/user'
-
-import type { MetaFunction } from '@remix-run/cloudflare'
 
 import Avatar from '~/components/ui/avatar'
 
