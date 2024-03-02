@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "remix dev --manual -c \"npm run start\"",
     "build": "remix build",
-    "start": "wrangler pages dev --compatibility-date=2023-06-21 ./public",
+    "start": "partykit dev",
     "generate:images": "ts-node lib/generateImages.ts"
   },
   "dependencies": {

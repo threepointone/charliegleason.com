@@ -12,6 +12,11 @@ import { projects, articles, features } from '~/data'
 import { useMatches } from '@remix-run/react'
 import { EMOJI_URL } from '../constants'
 
+import type { MetaFunction, LoaderFunction, LoaderFunctionArgs } from 'partymix'
+
+import SharedSpace from '~/components/ui/cursors/shared-space'
+import CursorsContextProvider from '~/components/ui/cursors/cursors-context'
+
 export const meta: MetaFunction<typeof loader> = ({ matches }) => {
   const parentsData = matches[0].data
   const parentsMeta = matches[0].meta
@@ -27,6 +32,17 @@ export const meta: MetaFunction<typeof loader> = ({ matches }) => {
   ]
 }
 
+export const loader: LoaderFunction = async function ({
+  context,
+}: LoaderFunctionArgs) {
+  // You can use context.lobby to read vars, communicate with parties,
+  // read from ai models or the vector db, and more.
+  //
+  // See https://docs.partykit.io/reference/partyserver-api/#partyfetchlobby
+  // for more info.
+  return Response.json({ partykitHost: PARTYKIT_HOST })
+}
+
 export default function IndexRoute() {
   const { symbol, photo, user } = useMatches().find(
     (route) => route.id === 'root'
@@ -37,6 +53,9 @@ export default function IndexRoute() {
       <Layout wide>
         <Header symbol={symbol} photo={photo} />
         <Sections>
+          <CursorsContextProvider>
+            <SharedSpace />
+          </CursorsContextProvider>
           <Overview />
           <Work />
           <Selected sections={[projects, articles, features]} />

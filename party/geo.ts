@@ -1,93 +1,160 @@
-// We use this 'party' to get and broadcast presence information
-// from all connected users. We'll use this to show how many people
-// are connected to the room, and where they're from.
-
-import type { State } from '../messages'
-
 import type * as Party from 'partykit/server'
 
-export default class MyRemix implements Party.Server {
+type Cursor = {
+  // replicating the default connection fields to avoid
+  // having to do an extra deserializeAttachment
+  id: string
+  uri: string
+
+  // country is set upon connection
+  country: string | null
+
+  // cursor fields are only set on first message
+  x?: number
+  y?: number
+  pointer?: 'mouse' | 'touch'
+  lastUpdate?: number
+}
+
+type UpdateMessage = {
+  type: 'update'
+  id: string // websocket.id
+} & Cursor
+
+type SyncMessage = {
+  type: 'sync'
+  cursors: { [id: string]: Cursor }
+}
+
+type RemoveMessage = {
+  type: 'remove'
+  id: string // websocket.id
+}
+
+type ConnectionWithCursor = Party.Connection & { cursor?: Cursor }
+
+// server.ts
+export default class CursorServer implements Party.Server {
   // eslint-disable-next-line no-useless-constructor
   constructor(public room: Party.Room) {}
 
-  // we'll store the state in memory
-  state: State = {
-    total: 0,
-    from: {},
-  }
-  // let's opt in to hibernation mode, for much higher concurrency
-  // like, 1000s of people in a room 🤯
-  // This has tradeoffs for the developer, like needing to hydrate/rehydrate
-  // state on start, so be careful!
-  static options = {
+  options: Party.ServerOptions = {
     hibernate: true,
   }
 
-  // This is called every time a new room is made
-  // since we're using hibernation mode, we should
-  // "rehydrate" this.state here from all connections
-  onStart(): void | Promise<void> {
-    for (const connection of this.room.getConnections<{ from: string }>()) {
-      const from = connection.state!.from
-      this.state = {
-        total: this.state.total + 1,
-        from: {
-          ...this.state.from,
-          [from]: (this.state.from[from] ?? 0) + 1,
-        },
+  onConnect(
+    websocket: Party.Connection,
+    { request }: Party.ConnectionContext
+  ): void | Promise<void> {
+    const country = request.cf?.country ?? null
+
+    // Stash the country in the websocket attachment
+    websocket.serializeAttachment({
+      ...websocket.deserializeAttachment(),
+      country: country,
+    })
+
+    console.log('[connect]', this.room.id, websocket.id, country)
+
+    // On connect, send a "sync" message to the new connection
+    // Pull the cursor from all websocket attachments
+    let cursors: { [id: string]: Cursor } = {}
+    for (const ws of this.room.getConnections()) {
+      const id = ws.id
+      let cursor =
+        (ws as ConnectionWithCursor).cursor ?? ws.deserializeAttachment()
+      if (
+        id !== websocket.id &&
+        cursor !== null &&
+        cursor.x !== undefined &&
+        cursor.y !== undefined
+      ) {
+        cursors[id] = cursor
       }
     }
+
+    const msg = {
+      type: 'sync',
+      cursors: cursors,
+    } as SyncMessage
+
+    websocket.send(JSON.stringify(msg))
   }
 
-  // This is called every time a new connection is made
-  async onConnect(
-    connection: Party.Connection<{ from: string }>,
-    ctx: Party.ConnectionContext
-  ): Promise<void> {
-    // Let's read the country from the request context
-    const from = (ctx.request.cf?.country ?? 'unknown') as string
-    // and update our state
-    this.state = {
-      total: this.state.total + 1,
-      from: {
-        ...this.state.from,
-        [from]: (this.state.from[from] ?? 0) + 1,
-      },
+  onMessage(
+    message: string,
+    websocket: Party.Connection
+  ): void | Promise<void> {
+    const position = JSON.parse(message as string)
+    const prevCursor = this.getCursor(websocket)
+    const cursor = {
+      id: websocket.id,
+      x: position.x,
+      y: position.y,
+      pointer: position.pointer,
+      country: prevCursor?.country,
+      lastUpdate: Date.now(),
+    } as Cursor
+
+    this.setCursor(websocket, cursor)
+
+    const msg =
+      position.x && position.y
+        ? ({
+            type: 'update',
+            ...cursor,
+            id: websocket.id,
+          } as UpdateMessage)
+        : ({
+            type: 'remove',
+            id: websocket.id,
+          } as RemoveMessage)
+
+    // Broadcast, excluding self
+    this.room.broadcast(JSON.stringify(msg), [websocket.id])
+  }
+
+  getCursor(connection: ConnectionWithCursor) {
+    if (!connection.cursor) {
+      connection.cursor = connection.deserializeAttachment()
     }
-    // let's also store where we're from on the connection
-    // so we can hydrate state on start, as well as reference it on close
-    connection.setState({ from })
-    // finally, let's broadcast the new state to all connections
-    this.room.broadcast(JSON.stringify(this.state))
+
+    return connection.cursor
   }
 
-  // This is called every time a connection is closed
-  async onClose(connection: Party.Connection<{ from: string }>): Promise<void> {
-    // let's update our state
-    // first let's read the country from the connection state
-    const from = connection.state!.from
-    // and update our state
-    this.state = {
-      total: this.state.total - 1,
-      from: {
-        ...this.state.from,
-        [from]: (this.state.from[from] ?? 0) - 1,
-      },
+  setCursor(connection: ConnectionWithCursor, cursor: Cursor) {
+    let prevCursor = connection.cursor
+    connection.cursor = cursor
+
+    // throttle writing to attachment to once every 100ms
+    if (
+      !prevCursor ||
+      !prevCursor.lastUpdate ||
+      (cursor.lastUpdate && cursor.lastUpdate - prevCursor.lastUpdate > 100)
+    ) {
+      // Stash the cursor in the websocket attachment
+      connection.serializeAttachment({
+        ...cursor,
+      })
     }
-    // finally, let's broadcast the new state to all connections
-    this.room.broadcast(JSON.stringify(this.state))
   }
 
-  // This is called when a connection has an error
-  async onError(
-    connection: Party.Connection<{ from: string }>,
-    err: Error
-  ): Promise<void> {
-    // let's log the error
-    console.error(err)
-    // and close the connection
-    await this.onClose(connection)
+  onClose(websocket: Party.Connection) {
+    // Broadcast a "remove" message to all connections
+    const msg = {
+      type: 'remove',
+      id: websocket.id,
+    } as RemoveMessage
+
+    console.log(
+      '[disconnect]',
+      this.room.id,
+      websocket.id,
+      websocket.readyState
+    )
+
+    this.room.broadcast(JSON.stringify(msg), [])
   }
 }
 
-MyRemix satisfies Party.Worker
+CursorServer satisfies Party.Worker

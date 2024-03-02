@@ -59,7 +59,8 @@ export async function action({ request, context }: ActionArgs) {
   const redirectTo = safeRedirect(formData.get('redirectTo'))
 
   const password = formData.get('password')
-  const user = password === context.AUTH_PASSWORD ? { id: 'guest' } : false
+  const user =
+    password === context.lobby.env.AUTH_PASSWORD ? { id: 'guest' } : false
 
   if (!user) {
     const searchParams = new URLSearchParams([

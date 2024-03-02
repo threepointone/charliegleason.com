@@ -6,7 +6,8 @@ import type { AppLoadContext } from '@remix-run/cloudflare'
 const USER_SESSION_KEY = 'userId'
 
 export function getSessionStorage(context: AppLoadContext) {
-  if (!context.SESSION_SECRET) throw new Error('SESSION_SECRET is not defined')
+  if (!context.lobby.env.SESSION_SECRET)
+    throw new Error('SESSION_SECRET is not defined')
 
   return createCookieSessionStorage({
     cookie: {
@@ -14,7 +15,7 @@ export function getSessionStorage(context: AppLoadContext) {
       httpOnly: true,
       path: '/',
       sameSite: 'lax',
-      secrets: [context.SESSION_SECRET as string],
+      secrets: [context.lobby.env.SESSION_SECRET as string],
     },
   })
 }
