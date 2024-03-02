@@ -1,4 +1,6 @@
 import Link from '~/components/ui/link'
+import SharedSpace from '~/components/ui/cursors/shared-space'
+import CursorsContextProvider from '~/components/ui/cursors/cursors-context'
 
 export default function Footer({ user }: { user?: { id: string } }) {
   return (
@@ -44,6 +46,9 @@ export default function Footer({ user }: { user?: { id: string } }) {
           </Link>
         </p>
       ) : null}
+      <CursorsContextProvider>
+        <SharedSpace />
+      </CursorsContextProvider>
     </div>
   )
 }

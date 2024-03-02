@@ -14,9 +14,6 @@ import { EMOJI_URL } from '../constants'
 
 import type { MetaFunction, LoaderFunction, LoaderFunctionArgs } from 'partymix'
 
-import SharedSpace from '~/components/ui/cursors/shared-space'
-import CursorsContextProvider from '~/components/ui/cursors/cursors-context'
-
 export const meta: MetaFunction<typeof loader> = ({ matches }) => {
   const parentsData = matches[0].data
   const parentsMeta = matches[0].meta
@@ -53,9 +50,6 @@ export default function IndexRoute() {
       <Layout wide>
         <Header symbol={symbol} photo={photo} />
         <Sections>
-          <CursorsContextProvider>
-            <SharedSpace />
-          </CursorsContextProvider>
           <Overview />
           <Work />
           <Selected sections={[projects, articles, features]} />
