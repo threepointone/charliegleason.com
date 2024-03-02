@@ -42,7 +42,7 @@ export default function OtherCursor(props: {
   const lastUpdate = new Date(cursor.lastUpdate).toLocaleTimeString()
 
   return (
-    <div className="absolute" style={{ left: left, top: top }}>
+    <div className="fixed" style={{ left: left, top: top }}>
       {pointer === 'touch' ? (
         <svg
           height="32"
