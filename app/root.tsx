@@ -1,8 +1,5 @@
-import type {
-  MetaFunction,
-  LinksFunction,
-  LoaderFunction,
-} from '@remix-run/cloudflare'
+import type { MetaFunction, LoaderFunction } from '@remix-run/cloudflare'
+import type { LinksFunction } from 'partymix'
 import {
   Links,
   LiveReload,
